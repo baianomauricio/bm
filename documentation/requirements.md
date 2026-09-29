@@ -34,7 +34,7 @@ The holding page is live and the owner likes it — **keep as-is** until the rea
 
 ## §6. Open questions
 
-- **Q1.** GA4 measurement IDs for mauriciosilva.com and baiano.photos — still to come from the owner.
+- **Q1.** GA4 measurement ID for baiano.photos — still to come from the owner. (mauriciosilva.com's is G-KP2Z7KM9ZP, added 2026-09-28; each site keeps its own property.)
 - **Q2.** Confirm custom-domain propagation (`baianomauricio.com`, `www`) once DNS settles.
 - **Q3.** Analytics approach differs by site (`gtag.js` here vs GTM planned for the portfolio) — unify later or keep per-site?
 
