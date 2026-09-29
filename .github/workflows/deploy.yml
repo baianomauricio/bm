@@ -1,0 +1,25 @@
+name: Deploy to Firebase Hosting
+
+# Production-only auto-deploy: every push to master deploys the site live.
+# No pull-request previews (same policy as the portfolio and baiano-photos sites).
+# Whatever is in public/ at push time is what goes live.
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      - name: Deploy to Firebase Hosting (production)
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: ${{ secrets.GITHUB_TOKEN }}
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: baianomauricio-35586
+          channelId: live
