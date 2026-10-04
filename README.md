@@ -14,6 +14,10 @@ This site is the personal member of a three-site collection: [mauriciosilva.com]
 |---|---|
 | `/` | Holding page — intentionally minimal until the real site is scoped |
 
+## Sitemap
+
+- https://www.baianomauricio.com/ (holding page — the sitemap will grow when the real site is scoped)
+
 ## Repo layout
 
 - `public/` — site source and deploy directory (currently a single `index.html` holding page)
