@@ -11,6 +11,7 @@
       --bull-color: #188038;
       --bear-color: #e11d1d;
       --box-stroke: #333333;
+      --muted-color: #555555;
     }
 
     * {
@@ -68,6 +69,15 @@
       text-align: center;
       color: var(--text-color);
     }
+
+    .pattern-desc {
+      margin-top: 4px;
+      font-size: 16px;
+      line-height: 1.45;
+      font-weight: 400;
+      text-align: center;
+      color: var(--muted-color);
+    }
   </style>
 </head>
 <body>
@@ -78,6 +88,7 @@
     const PATTERNS = [
       {
         title: "Shooting Star",
+        description: "A small body near the low with a long upper wick after an uptrend. Sellers rejected the higher prices, a warning of a reversal down.",
         highlight: [2, 2],
         candles: [
           [20, 44, 12, 36],
@@ -89,6 +100,7 @@
       },
       {
         title: "Bearish Engulfing",
+        description: "A small green candle followed by a larger red candle whose body completely engulfs it. Sellers have overwhelmed buyers, signaling a reversal down.",
         highlight: [2, 3],
         candles: [
           [22, 56, 14, 48],
@@ -101,6 +113,7 @@
       },
       {
         title: "Hanging Man",
+        description: "A small body near the top with a long lower wick after an uptrend. Sellers stepped in during the session, hinting the rise may be ending.",
         highlight: [2, 2],
         candles: [
           [20, 50, 12, 42],
@@ -112,6 +125,7 @@
       },
       {
         title: "Bearish Harami",
+        description: "A small red candle contained inside the body of the previous green candle. Upward momentum is stalling, a possible reversal down.",
         highlight: [2, 3],
         candles: [
           [16, 52, 8, 44],
@@ -124,6 +138,7 @@
       },
       {
         title: "Gravestone Doji",
+        description: "The open and close sit together at the session low with a long upper wick. The rally was fully rejected, a strong reversal signal.",
         highlight: [2, 2],
         candles: [
           [20, 44, 12, 36],
@@ -135,6 +150,7 @@
       },
       {
         title: "Dark Cloud Cover",
+        description: "A red candle that opens above the previous green candle's high but closes below the midpoint of its body. Buyers lost control during the rally.",
         highlight: [2, 3],
         candles: [
           [22, 50, 14, 42],
@@ -147,6 +163,7 @@
       },
       {
         title: "Bearish Marubozu",
+        description: "A long red body with no wicks: it opens at the high and closes at the low. Sellers were in control from start to finish.",
         highlight: [4, 4],
         candles: [
           [24, 44, 18, 38],
@@ -164,6 +181,7 @@
       },
       {
         title: "Tweezer Top",
+        description: "Two candles that share the same high, first green then red. The repeated rejection of one price level marks a possible top.",
         highlight: [2, 3],
         candles: [
           [22, 54, 14, 46],
@@ -176,6 +194,7 @@
       },
       {
         title: "Bearish Spinning Top",
+        description: "A small red body with wicks on both sides after a rise. It shows growing indecision and can precede a move down.",
         highlight: [2, 2],
         candles: [
           [20, 44, 12, 36],
@@ -187,6 +206,7 @@
       },
       {
         title: "Falling Three Method",
+        description: "A long red candle, a few small candles drifting inside its range, then another long red candle to a new low. The downtrend is continuing.",
         highlight: [1, 5],
         candles: [
           [86, 92, 70, 76],
@@ -201,6 +221,7 @@
       },
       {
         title: "Bearish Long Legged Doji",
+        description: "Open and close are nearly equal with long wicks on both ends. After a rise, this indecision can come before a reversal down.",
         highlight: [2, 2],
         candles: [
           [20, 44, 12, 36],
@@ -212,6 +233,7 @@
       },
       {
         title: "Three Black Crows",
+        description: "Three long red candles in a row, each closing near its low. Sustained selling pressure that signals a strong reversal down.",
         highlight: [2, 4],
         candles: [
           [22, 54, 14, 46],
@@ -225,6 +247,7 @@
       },
       {
         title: "Three Inside Down",
+        description: "A red candle contained inside the previous green candle, followed by a third candle closing lower. A harami with confirmation of the reversal.",
         highlight: [2, 4],
         candles: [
           [18, 52, 10, 44],
@@ -238,6 +261,7 @@
       },
       {
         title: "Evening Star",
+        description: "A strong green candle, a small star candle at the top, then a red candle closing deep into the first body. A classic reversal at the top of a rise.",
         highlight: [2, 4],
         candles: [
           [18, 50, 10, 42],
@@ -250,6 +274,7 @@
       },
       {
         title: "Three Outside Down",
+        description: "A red candle engulfs the previous green one, then a third candle closes lower. A bearish engulfing with confirmation of the reversal.",
         highlight: [2, 4],
         candles: [
           [18, 46, 10, 38],
@@ -357,6 +382,11 @@
 
       card.appendChild(svg);
       card.appendChild(label);
+
+      const desc = document.createElement("div");
+      desc.className = "pattern-desc";
+      desc.textContent = pattern.description;
+      card.appendChild(desc);
       grid.appendChild(card);
     });
   </script>
