@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bearish Candlestick Patterns</title>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #111111;
+      --bull-color: #188038;
+      --bear-color: #e11d1d;
+      --box-stroke: #333333;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(220px, 280px));
+      gap: 36px 28px;
+      max-width: 920px;
+      width: 100%;
+    }
+
+    @media (max-width: 768px) {
+      .pattern-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 480px) {
+      .pattern-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pattern-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .pattern-card svg {
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    .pattern-title {
+      margin-top: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      text-align: center;
+      color: var(--text-color);
+    }
+  </style>
+</head>
+<body>
+
+  <main class="pattern-grid" id="chart-grid"></main>
+
+  <script>
+    const PATTERNS = [
+      {
+        title: "Shooting Star",
+        highlight: [2, 2],
+        candles: [
+          [20, 44, 12, 36],
+          [34, 65, 25, 58],
+          [64, 92, 60, 70],
+          [60, 68, 34, 42],
+          [38, 46, 8, 16]
+        ]
+      },
+      {
+        title: "Bearish Engulfing",
+        highlight: [2, 3],
+        candles: [
+          [22, 56, 14, 48],
+          [44, 64, 34, 56],
+          [60, 84, 54, 78],
+          [82, 88, 52, 58],
+          [54, 62, 24, 32],
+          [28, 36, 4, 12]
+        ]
+      },
+      {
+        title: "Hanging Man",
+        highlight: [2, 2],
+        candles: [
+          [20, 50, 12, 42],
+          [48, 76, 40, 70],
+          [84, 92, 64, 90],
+          [78, 86, 42, 50],
+          [46, 54, 8, 16]
+        ]
+      },
+      {
+        title: "Bearish Harami",
+        highlight: [2, 3],
+        candles: [
+          [16, 52, 8, 44],
+          [42, 62, 32, 54],
+          [58, 92, 52, 88],
+          [82, 86, 62, 68],
+          [64, 72, 34, 46],
+          [42, 50, 8, 16]
+        ]
+      },
+      {
+        title: "Gravestone Doji",
+        highlight: [2, 2],
+        candles: [
+          [20, 44, 12, 36],
+          [36, 66, 28, 60],
+          [66, 92, 66, 66],
+          [60, 68, 34, 42],
+          [38, 46, 8, 16]
+        ]
+      },
+      {
+        title: "Dark Cloud Cover",
+        highlight: [2, 3],
+        candles: [
+          [22, 50, 14, 42],
+          [40, 66, 30, 58],
+          [56, 88, 50, 82],
+          [90, 94, 58, 64],
+          [60, 68, 28, 36],
+          [32, 40, 4, 12]
+        ]
+      },
+      {
+        title: "Bearish Marubozu",
+        highlight: [4, 4],
+        candles: [
+          [24, 44, 18, 38],
+          [38, 58, 32, 52],
+          [52, 72, 46, 66],
+          [66, 86, 60, 80],
+          [84, 84, 58, 58],
+          [56, 64, 44, 48],
+          [48, 54, 34, 38],
+          [36, 48, 30, 44],
+          [42, 46, 24, 28],
+          [26, 34, 16, 20],
+          [18, 24, 6, 10]
+        ]
+      },
+      {
+        title: "Tweezer Top",
+        highlight: [2, 3],
+        candles: [
+          [22, 54, 14, 46],
+          [44, 64, 34, 56],
+          [62, 92, 54, 86],
+          [86, 92, 54, 62],
+          [56, 64, 26, 34],
+          [30, 38, 4, 12]
+        ]
+      },
+      {
+        title: "Bearish Spinning Top",
+        highlight: [2, 2],
+        candles: [
+          [20, 44, 12, 36],
+          [36, 64, 28, 56],
+          [76, 92, 62, 72],
+          [62, 70, 34, 44],
+          [38, 46, 8, 16]
+        ]
+      },
+      {
+        title: "Falling Three Method",
+        highlight: [1, 5],
+        candles: [
+          [86, 92, 70, 76],
+          [78, 82, 42, 46],
+          [46, 58, 42, 54],
+          [52, 64, 48, 60],
+          [58, 70, 54, 66],
+          [68, 72, 28, 32],
+          [28, 36, 16, 20],
+          [18, 24, 6, 10]
+        ]
+      },
+      {
+        title: "Bearish Long Legged Doji",
+        highlight: [2, 2],
+        candles: [
+          [20, 44, 12, 36],
+          [36, 64, 28, 56],
+          [77, 94, 60, 77],
+          [62, 70, 34, 44],
+          [38, 46, 8, 16]
+        ]
+      },
+      {
+        title: "Three Black Crows",
+        highlight: [2, 4],
+        candles: [
+          [22, 54, 14, 46],
+          [48, 78, 40, 72],
+          [82, 88, 64, 68],
+          [72, 76, 48, 52],
+          [56, 60, 32, 36],
+          [32, 40, 16, 20],
+          [18, 24, 4, 10]
+        ]
+      },
+      {
+        title: "Three Inside Down",
+        highlight: [2, 4],
+        candles: [
+          [18, 52, 10, 44],
+          [44, 62, 34, 54],
+          [58, 90, 52, 86],
+          [82, 86, 66, 70],
+          [68, 72, 38, 42],
+          [36, 44, 20, 24],
+          [20, 26, 4, 10]
+        ]
+      },
+      {
+        title: "Evening Star",
+        highlight: [2, 4],
+        candles: [
+          [18, 50, 10, 42],
+          [42, 72, 34, 66],
+          [66, 92, 58, 86],
+          [82, 96, 72, 78],
+          [76, 82, 34, 40],
+          [36, 44, 6, 14]
+        ]
+      },
+      {
+        title: "Three Outside Down",
+        highlight: [2, 4],
+        candles: [
+          [18, 46, 10, 38],
+          [40, 66, 32, 58],
+          [62, 84, 56, 78],
+          [82, 88, 54, 58],
+          [56, 62, 28, 32],
+          [28, 36, 4, 12]
+        ]
+      }
+    ];
+
+    function renderPatternSVG(pattern) {
+      const svgNS = "http://www.w3.org/2000/svg";
+      const width = 240;
+      const height = 165;
+      const padX = 18;
+      const padY = 12;
+
+      const svg = document.createElementNS(svgNS, "svg");
+      svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+
+      const count = pattern.candles.length;
+      const plotW = width - padX * 2;
+      const plotH = height - padY * 2;
+      const step = plotW / count;
+      const candleWidth = Math.min(15, step * 0.56);
+      const wickWidth = 2;
+
+      const yScale = (val) => padY + plotH - (val / 100) * plotH;
+
+      if (pattern.highlight) {
+        const [startIdx, endIdx] = pattern.highlight;
+        let maxHigh = -Infinity;
+        let minLow = Infinity;
+
+        for (let i = startIdx; i <= endIdx; i++) {
+          const [, h, l] = pattern.candles[i];
+          if (h > maxHigh) maxHigh = h;
+          if (l < minLow) minLow = l;
+        }
+
+        const boxPadX = 6;
+        const boxPadY = 6;
+        const x1 = padX + startIdx * step + (step - candleWidth) / 2 - boxPadX;
+        const x2 = padX + endIdx * step + (step + candleWidth) / 2 + boxPadX;
+        const y1 = yScale(maxHigh) - boxPadY;
+        const y2 = yScale(minLow) + boxPadY;
+
+        const rect = document.createElementNS(svgNS, "rect");
+        rect.setAttribute("x", x1);
+        rect.setAttribute("y", y1);
+        rect.setAttribute("width", x2 - x1);
+        rect.setAttribute("height", y2 - y1);
+        rect.setAttribute("fill", "none");
+        rect.setAttribute("stroke", "#333333");
+        rect.setAttribute("stroke-width", "1.35");
+        svg.appendChild(rect);
+      }
+
+      pattern.candles.forEach(([open, high, low, close], idx) => {
+        const isBull = close > open;
+        const isDoji = close === open;
+        const color = isBull ? "#188038" : "#e11d1d";
+
+        const centerX = padX + idx * step + step / 2;
+        const yHigh = yScale(high);
+        const yLow = yScale(low);
+        const yOpen = yScale(open);
+        const yClose = yScale(close);
+
+        const wick = document.createElementNS(svgNS, "line");
+        wick.setAttribute("x1", centerX);
+        wick.setAttribute("x2", centerX);
+        wick.setAttribute("y1", yHigh);
+        wick.setAttribute("y2", yLow);
+        wick.setAttribute("stroke", color);
+        wick.setAttribute("stroke-width", wickWidth);
+        svg.appendChild(wick);
+
+        const bodyTop = Math.min(yOpen, yClose);
+        const bodyHeight = isDoji ? 2 : Math.max(2, Math.abs(yClose - yOpen));
+
+        const body = document.createElementNS(svgNS, "rect");
+        body.setAttribute("x", centerX - candleWidth / 2);
+        body.setAttribute("y", isDoji ? bodyTop - 1 : bodyTop);
+        body.setAttribute("width", candleWidth);
+        body.setAttribute("height", bodyHeight);
+        body.setAttribute("fill", color);
+        svg.appendChild(body);
+      });
+
+      return svg;
+    }
+
+    const grid = document.getElementById("chart-grid");
+    PATTERNS.forEach((pattern) => {
+      const card = document.createElement("div");
+      card.className = "pattern-card";
+
+      const svg = renderPatternSVG(pattern);
+      const label = document.createElement("div");
+      label.className = "pattern-title";
+      label.textContent = pattern.title;
+
+      card.appendChild(svg);
+      card.appendChild(label);
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>
