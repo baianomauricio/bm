@@ -13,21 +13,23 @@ This site is the personal member of a three-site collection: [mauriciosilva.com]
 | Route | Content |
 |---|---|
 | `/` | Holding page — intentionally minimal until the real site is scoped |
+| `/finance/stocks/chart_pattern.html` | Bearish Candlestick Patterns reference - 15 pattern cards with example charts (standalone page, not yet linked from the holding page) |
 
 ## Sitemap
 
 - https://www.baianomauricio.com/ (holding page — the sitemap will grow when the real site is scoped)
+- https://www.baianomauricio.com/finance/stocks/chart_pattern.html (Bearish Candlestick Patterns reference)
 
 ## Repo layout
 
-- `public/` — site source and deploy directory (currently a single `index.html` holding page)
+- `public/` — site source and deploy directory: the `index.html` holding page plus standalone pages (currently `finance/stocks/chart_pattern.html`)
 - `firebase.json` — Hosting config (`public/` web root)
 - `.github/workflows/` — CI: pushes to `master` auto-deploy to production
 
 ## Workflow
 
 1. Requirements live in the portfolio repo: `documentation/bm/requirements.md` (versioned, owned by Elizabeth).
-2. Edit `public/index.html`, commit, push to `master` — GitHub Actions deploys to production automatically.
+2. Edit files under `public/`, commit, push to `master` — GitHub Actions deploys to production automatically.
 
 ## Constraints
 
