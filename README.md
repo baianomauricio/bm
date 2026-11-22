@@ -13,7 +13,7 @@ This site is the personal member of a three-site collection: [mauriciosilva.com]
 | Route | Content |
 |---|---|
 | `/` | Holding page — intentionally minimal until the real site is scoped |
-| `/finance/stocks/chart_pattern.html` | Bearish Candlestick Patterns reference - 15 pattern cards with example charts (standalone page, not yet linked from the holding page) |
+| `/finance/stocks/chart_pattern.html` | Bearish Candlestick Patterns reference - 15 pattern cards with example charts, plus a MACD Indicator section (signal line crossover, divergence, centerline crossover — bullish and bearish) (standalone page, not yet linked from the holding page) |
 | `/ai/` | AI hobby index |
 | `/ai/claude-secret-codes.html` | Five Claude prompt shortcuts from Outskill, with attribution and unverified-claims notes |
 
