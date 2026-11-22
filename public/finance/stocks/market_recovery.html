@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5LXCBNQ3');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Market Shocks &amp; Recovery — S&amp;P 500 Returns After Major World Events</title>
+  <meta name="description" content="S&P 500 returns 1 and 12 months after 15 major world events, 1940–2019. The stock market usually recovers within a year — but not always." />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BRBDZ471ZV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-BRBDZ471ZV');
+  </script>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #111111;
+      --muted-color: #555555;
+      --line-color: #dddddd;
+      --neg-bg: #f04438;
+      --pos-bg: #22c55e;
+      --spark: #7c3aed;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      max-width: 1020px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      font-size: 17px;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .table-scroll {
+      margin-top: 32px;
+      overflow-x: auto;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 780px;
+    }
+
+    th {
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      text-align: left;
+      vertical-align: bottom;
+      padding: 10px 12px;
+      border-bottom: 2px solid #333333;
+    }
+
+    td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--line-color);
+      font-size: 15px;
+      vertical-align: middle;
+    }
+
+    td.event {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    td.date {
+      white-space: nowrap;
+    }
+
+    td.ret {
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    td.ret.neg {
+      background-color: var(--neg-bg);
+    }
+
+    td.ret.pos {
+      background-color: var(--pos-bg);
+    }
+
+    td.spark-cell {
+      min-width: 190px;
+    }
+
+    td.spark-cell svg {
+      display: block;
+      width: 180px;
+      height: 36px;
+    }
+
+    .source {
+      margin-top: 20px;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--muted-color);
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 28px 12px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LXCBNQ3"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <main class="page">
+    <h1>What History Says Will Happen Next for Markets</h1>
+    <p class="subtitle">The stock market usually recovers within a year after major world events — but not always</p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr>
+            <th>Market Shock Events</th>
+            <th>Event Date</th>
+            <th>S&amp;P 500 Returns 1 Month</th>
+            <th>S&amp;P 500 Returns 1, 3, 6 &amp; 12 Months</th>
+            <th>S&amp;P 500 Returns 12 Months</th>
+          </tr>
+        </thead>
+        <tbody id="recovery-body"></tbody>
+      </table>
+    </div>
+
+    <p class="source">Source: LPL Financial</p>
+  </main>
+
+  <script>
+    // Data transcribed from the LPL Financial graphic (via Yahoo Finance):
+    // event names and dates as printed; 1- and 12-month S&P 500 returns
+    // exact. The source graphic does NOT label the 3- and 6-month values
+    // numerically, so each spark array's middle two points are shape-only
+    // values traced from the pictured line — they are drawn, never shown
+    // as numbers. spark[0] is always the exact 1-month return and
+    // spark[3] the exact 12-month return.
+    const ROWS = [
+      { event: "GERMANY INVADES FRANCE", date: "05/10/1940", m1: -19.90, m12: -18.70, spark: [-19.90, -19.00, -18.20, -18.70] },
+      { event: "PEARL HARBOR ATTACK", date: "12/07/1941", m1: -1.00, m12: 4.30, spark: [-1.00, -2.00, -1.00, 4.30] },
+      { event: "N. KOREA INVADES S. KOREA", date: "06/25/1950", m1: -10.00, m12: 11.70, spark: [-10.00, -3.00, 4.00, 11.70] },
+      { event: "SUEZ CRISIS", date: "10/29/1956", m1: -4.40, m12: -11.60, spark: [-4.40, -4.00, -5.00, -11.60] },
+      { event: "CUBAN MISSILE CRISIS", date: "10/16/1962", m1: 5.10, m12: 27.80, spark: [5.10, 12.00, 20.00, 27.80] },
+      { event: "GULF OF TONKIN INCIDENT", date: "08/02/1964", m1: -1.60, m12: 2.70, spark: [-1.60, 2.50, 1.80, 2.70] },
+      { event: "TET OFFENSIVE", date: "01/30/1968", m1: -3.80, m12: 10.20, spark: [-3.80, 0.00, 14.00, 10.20] },
+      { event: "OIL EMBARGO", date: "10/16/1973", m1: -7.00, m12: -35.20, spark: [-7.00, -8.00, -10.00, -35.20] },
+      { event: "IRAQ'S INVASION OF KUWAIT", date: "08/02/1990", m1: -8.20, m12: 10.10, spark: [-8.20, -9.00, -2.00, 10.10] },
+      { event: "U.S. TERRORIST ATTACKS", date: "09/11/2001", m1: -0.20, m12: -18.40, spark: [-0.20, 0.50, 0.00, -18.40] },
+      { event: "IRAQ WAR STARTED", date: "03/20/2003", m1: 19.00, m12: 26.70, spark: [19.00, 17.00, 21.00, 26.70] },
+      { event: "LEHMAN BROTHERS COLLAPSES", date: "09/15/2008", m1: -16.30, m12: -11.70, spark: [-16.30, -18.00, -17.00, -11.70] },
+      { event: "RUSSIA ANNEXED CRIMEA", date: "02/20/2014", m1: 1.50, m12: 14.70, spark: [1.50, 6.00, 10.00, 14.70] },
+      { event: "NORTH KOREA MISSILE CRISIS", date: "07/28/2017", m1: -1.10, m12: 13.40, spark: [-1.10, 5.00, 8.00, 13.40] },
+      { event: "SAUDI ARAMCO DRONE STRIKE", date: "09/14/2019", m1: -1.40, m12: 12.50, spark: [-1.40, 2.00, 0.00, 12.50] }
+    ];
+
+    function renderSparkline(values) {
+      const svgNS = "http://www.w3.org/2000/svg";
+      const width = 180;
+      const height = 36;
+      const padX = 4;
+      const padY = 4;
+
+      const svg = document.createElementNS(svgNS, "svg");
+      svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+
+      const min = Math.min(...values);
+      const max = Math.max(...values);
+      const span = Math.max(max - min, 1);
+      const y = (v) => padY + (height - padY * 2) * (1 - (v - min) / span);
+      const x = (i) => padX + i * ((width - padX * 2) / (values.length - 1));
+
+      const pts = values.map((v, i) => `${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(" ");
+
+      const area = document.createElementNS(svgNS, "polygon");
+      area.setAttribute("points", `${x(0).toFixed(1)},${height - padY} ${pts} ${x(values.length - 1).toFixed(1)},${height - padY}`);
+      area.setAttribute("fill", "rgba(124, 58, 237, 0.12)");
+      svg.appendChild(area);
+
+      const line = document.createElementNS(svgNS, "polyline");
+      line.setAttribute("points", pts);
+      line.setAttribute("fill", "none");
+      line.setAttribute("stroke", "#7c3aed");
+      line.setAttribute("stroke-width", "2");
+      line.setAttribute("stroke-linejoin", "round");
+      svg.appendChild(line);
+
+      const dot = document.createElementNS(svgNS, "circle");
+      dot.setAttribute("cx", x(values.length - 1));
+      dot.setAttribute("cy", y(values[values.length - 1]));
+      dot.setAttribute("r", "3");
+      dot.setAttribute("fill", "#7c3aed");
+      svg.appendChild(dot);
+
+      return svg;
+    }
+
+    function retCell(value) {
+      const td = document.createElement("td");
+      td.className = "ret " + (value < 0 ? "neg" : "pos");
+      td.textContent = value.toFixed(2) + "%";
+      return td;
+    }
+
+    const body = document.getElementById("recovery-body");
+    ROWS.forEach((row) => {
+      const tr = document.createElement("tr");
+
+      const event = document.createElement("td");
+      event.className = "event";
+      event.textContent = row.event;
+      tr.appendChild(event);
+
+      const date = document.createElement("td");
+      date.className = "date";
+      date.textContent = row.date;
+      tr.appendChild(date);
+
+      tr.appendChild(retCell(row.m1));
+
+      const sparkCell = document.createElement("td");
+      sparkCell.className = "spark-cell";
+      sparkCell.appendChild(renderSparkline(row.spark));
+      tr.appendChild(sparkCell);
+
+      tr.appendChild(retCell(row.m12));
+
+      body.appendChild(tr);
+    });
+  </script>
+</body>
+</html>
