@@ -12,9 +12,9 @@ This site is the personal member of a three-site collection: [mauriciosilva.com]
 
 | Route | Content |
 |---|---|
-| `/` | Holding page — intentionally minimal until the real site is scoped |
-| `/finance/stocks/chart_pattern.html` | Bearish Candlestick Patterns reference - 15 pattern cards with example charts, plus a MACD Indicator section (signal line crossover, divergence, centerline crossover — bullish and bearish) (standalone page, not yet linked from the holding page) |
-| `/finance/stocks/market_recovery.html` | Market Shocks & Recovery - S&P 500 returns 1 and 12 months after 28 major world events, 1940–2026, with sparklines and a near-a-recession column (source: LPL Financial; three rows computed from index closes) (standalone page, not yet linked from the holding page) |
+| `/` | Holding page — minimal, with a Hobby/Finance expandable launcher linking the finance pages |
+| `/finance/stocks/chart_pattern.html` | Bearish Candlestick Patterns reference - 15 pattern cards with example charts, plus a MACD Indicator section (signal line crossover, divergence, centerline crossover — bullish and bearish) |
+| `/finance/stocks/market_recovery.html` | Market Shocks & Recovery - S&P 500 returns 1 and 12 months after 28 major world events, 1940–2026, with sparklines and a near-a-recession column (source: LPL Financial; three rows computed from index closes) |
 | `/ai/` | AI hobby index |
 | `/ai/claude-secret-codes.html` | Five Claude prompt shortcuts from Outskill, with attribution and unverified-claims notes |
 

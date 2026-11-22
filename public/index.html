@@ -35,6 +35,80 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     h1 { font-weight: 300; letter-spacing: 0.15em; }
     p { color: #777; }
+
+    /* Hobby/Finance launcher: trigger morphs into the menu grid.
+       The trigger and menu are built by the script below; without JS
+       this mount point stays empty and the page is unchanged. */
+    .launcher {
+      margin: 2rem auto 0;
+      width: 100%;
+      max-width: 480px;
+    }
+    .launcher-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font: inherit;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      color: #222;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 999px;
+      padding: 0.6rem 1.2rem;
+      cursor: pointer;
+    }
+    .launcher-trigger:hover { border-color: #bbb; }
+    .launcher-trigger:focus-visible { outline: 2px solid #222; outline-offset: 2px; }
+    .launcher-icon {
+      display: inline-block;
+      font-weight: 300;
+      transition: transform 200ms ease;
+    }
+    .launcher.open .launcher-icon { transform: rotate(45deg); }
+    .launcher-menu {
+      margin-top: 0.75rem;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      text-align: left;
+      overflow: hidden;
+      clip-path: inset(0 0 100% 0 round 12px);
+      opacity: 0;
+      transform: translateY(-6px);
+      visibility: hidden;
+      transition: clip-path 220ms ease, opacity 220ms ease, transform 220ms ease, visibility 0s linear 220ms;
+    }
+    .launcher.open .launcher-menu {
+      clip-path: inset(0 0 0% 0 round 12px);
+      opacity: 1;
+      transform: translateY(0);
+      visibility: visible;
+      transition: clip-path 220ms ease, opacity 220ms ease, transform 220ms ease, visibility 0s;
+    }
+    .launcher-menu[hidden] { display: none; }
+    .launcher-menu ul {
+      list-style: none;
+      margin: 0;
+      padding: 0.5rem;
+      display: grid;
+      gap: 0.25rem;
+    }
+    .launcher-menu a {
+      display: block;
+      padding: 0.6rem 0.75rem;
+      border-radius: 8px;
+      color: #222;
+      text-decoration: none;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+    .launcher-menu a:hover,
+    .launcher-menu a:focus-visible { background: #f0f0f0; outline: none; }
+    @media (prefers-reduced-motion: reduce) {
+      .launcher-menu,
+      .launcher-icon { transition: none; }
+    }
   </style>
 </head>
 <body>
@@ -45,7 +119,99 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <main>
     <h1>Mauricio Baiano</h1>
     <p>A new personal site is on its way. Stay tuned.</p>
+    <div class="launcher" id="launcher"></div>
     <p style="margin-top:2rem;font-size:0.8rem;color:#aaa">&copy; 2026</p>
   </main>
+
+  <script>
+    // Hobby/Finance launcher (FR-01–FR-06). Vanilla JS + CSS only — the
+    // change request's React/Motion references are pattern inspiration.
+    // Links are data-driven (FR-03): adding a page is one array entry.
+    // Finance pages only — the AI pages are a separate group later.
+    const FINANCE_LINKS = [
+      { label: "Bearish Candlestick Patterns & MACD Signals", href: "/finance/stocks/chart_pattern.html" },
+      { label: "Market Shocks & Recovery — S&P 500 Returns After Major World Events", href: "/finance/stocks/market_recovery.html" }
+    ];
+
+    const launcher = document.getElementById("launcher");
+
+    const trigger = document.createElement("button");
+    trigger.className = "launcher-trigger";
+    trigger.type = "button";
+    trigger.setAttribute("aria-expanded", "false");
+    trigger.setAttribute("aria-controls", "launcher-menu");
+
+    const triggerLabel = document.createElement("span");
+    triggerLabel.textContent = "Hobby/Finance";
+    trigger.appendChild(triggerLabel);
+
+    const triggerIcon = document.createElement("span");
+    triggerIcon.className = "launcher-icon";
+    triggerIcon.setAttribute("aria-hidden", "true");
+    triggerIcon.textContent = "+";
+    trigger.appendChild(triggerIcon);
+
+    const menu = document.createElement("div");
+    menu.className = "launcher-menu";
+    menu.id = "launcher-menu";
+    menu.hidden = true;
+
+    const list = document.createElement("ul");
+    const linkEls = FINANCE_LINKS.map((entry) => {
+      const li = document.createElement("li");
+      const a = document.createElement("a");
+      a.href = entry.href;
+      a.textContent = entry.label;
+      li.appendChild(a);
+      list.appendChild(li);
+      return a;
+    });
+    menu.appendChild(list);
+
+    launcher.appendChild(trigger);
+    launcher.appendChild(menu);
+
+    let expanded = false;
+
+    function prefersReducedMotion() {
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }
+
+    function expand() {
+      expanded = true;
+      trigger.setAttribute("aria-expanded", "true");
+      menu.hidden = false;
+      // Next frame so the clip-path transition runs from the collapsed state.
+      requestAnimationFrame(() => launcher.classList.add("open"));
+      if (linkEls[0]) linkEls[0].focus();
+    }
+
+    function collapse(returnFocus) {
+      expanded = false;
+      trigger.setAttribute("aria-expanded", "false");
+      launcher.classList.remove("open");
+      if (prefersReducedMotion()) {
+        menu.hidden = true;
+      } else {
+        menu.addEventListener("transitionend", function hideMenu() {
+          menu.hidden = true;
+        }, { once: true });
+      }
+      if (returnFocus) trigger.focus();
+    }
+
+    trigger.addEventListener("click", () => {
+      if (expanded) collapse(true);
+      else expand();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && expanded) collapse(true);
+    });
+
+    document.addEventListener("click", (event) => {
+      if (expanded && !launcher.contains(event.target)) collapse(true);
+    });
+  </script>
 </body>
 </html>
