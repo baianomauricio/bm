@@ -31,7 +31,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       background: #fafafa;
       color: #222;
       text-align: center;
-      padding: 1rem;
+      padding: 25px 1rem 1rem;
     }
     h1 { font-weight: 300; letter-spacing: 0.15em; }
     p { color: #777; }
@@ -109,6 +109,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .launcher-menu,
       .launcher-icon { transition: none; }
     }
+
+    /* Fixed breadcrumb bar (site-wide): 25px, full width, above content.
+       The bar scrolls horizontally on narrow screens; the page itself
+       never gains horizontal overflow. */
+    .breadcrumb-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 25px; z-index: 100;
+      display: flex; align-items: center; gap: 8px; padding: 0 12px;
+      overflow-x: auto; white-space: nowrap; scrollbar-width: none;
+      background: #fafafa; border-bottom: 1px solid #ddd;
+      font-size: 12px; line-height: 25px;
+    }
+    .breadcrumb-bar::-webkit-scrollbar { display: none; }
+    .breadcrumb-bar a { color: #234f86; text-underline-offset: .17em; }
+    .breadcrumb-bar a:hover { color: #102f58; }
+    .breadcrumb-bar a:focus-visible { outline: 2px solid #234f86; outline-offset: 2px; }
   </style>
 </head>
 <body>
@@ -116,6 +131,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LXCBNQ3"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
+<nav class="breadcrumb-bar" aria-label="Breadcrumb"><span aria-current="page">Home</span></nav>
   <main>
     <h1>Mauricio Baiano</h1>
     <p>A new personal site is on its way. Stay tuned. You can catch-up on my hobbies for now.</p>

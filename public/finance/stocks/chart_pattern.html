@@ -201,6 +201,21 @@
       clip: rect(0, 0, 0, 0);
       white-space: nowrap;
     }
+
+    /* Fixed breadcrumb bar (site-wide): 25px, full width, above content.
+       The bar scrolls horizontally on narrow screens; the page itself
+       never gains horizontal overflow. */
+    .breadcrumb-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 25px; z-index: 100;
+      display: flex; align-items: center; gap: 8px; padding: 0 12px;
+      overflow-x: auto; white-space: nowrap; scrollbar-width: none;
+      background: #fff; border-bottom: 1px solid #ddd;
+      font-size: 12px; line-height: 25px;
+    }
+    .breadcrumb-bar::-webkit-scrollbar { display: none; }
+    .breadcrumb-bar a { color: #234f86; text-underline-offset: .17em; }
+    .breadcrumb-bar a:hover { color: #102f58; }
+    .breadcrumb-bar a:focus-visible { outline: 2px solid #234f86; outline-offset: 2px; }
   </style>
 </head>
 <body>
@@ -208,6 +223,7 @@
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LXCBNQ3"
   height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
+<nav class="breadcrumb-bar" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Finance</span><span aria-hidden="true">/</span><span>Stocks</span><span aria-hidden="true">/</span><span aria-current="page">Chart Patterns</span></nav>
 
   <h1 class="visually-hidden">Bearish Candlestick Patterns &amp; MACD Signals</h1>
 
