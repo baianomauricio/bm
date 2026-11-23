@@ -21,7 +21,7 @@ This site is the personal member of a three-site collection: [mauriciosilva.com]
 ## Site-wide behavior
 
 - **Breadcrumb bar:** a fixed 25px bar at the top of every page, showing the trail from Home (e.g. Home / Finance / Stocks / Chart Patterns). Finance and Stocks are plain text until index pages exist for those segments. The bar scrolls horizontally on narrow screens.
-- **Curtains wipe transition:** plain left-clicks on same-origin links wipe three dark panels across the screen before navigating; the new page loads covered and lifts the curtain. Vanilla JS + CSS only — no framework, no CDN, no new requests. Reduced motion disables it; with JS off, navigation is plain.
+- **Curtains wipe transition:** plain left-clicks on same-origin links wipe three dark panels across the screen before navigating; the new page loads covered and lifts the curtain. The panels' leading edge is slanted 12°. Vanilla JS + CSS only — no framework, no CDN, no new requests. Reduced motion disables it; with JS off, navigation is plain.
 
 ## Sitemap
 
