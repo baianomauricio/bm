@@ -53,16 +53,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       letter-spacing: 0.05em;
       color: #222;
       background: #fff;
-      border: 2px solid #222;
+      border: 1px solid #ddd;
       border-radius: 999px;
       padding: 0.85rem 1.6rem;
       cursor: pointer;
-      /* Ring/double border (owner's reference image): dark outer ring,
-         page-background band, thin gray ring. */
-      box-shadow: 0 0 0 3px #fafafa, 0 0 0 4px #ddd;
     }
-    .launcher-trigger:hover { box-shadow: 0 0 0 3px #fafafa, 0 0 0 4px #bbb; }
-    .launcher-trigger:focus-visible { outline: 2px solid #222; outline-offset: 6px; }
+    .launcher-trigger:hover { border-color: #bbb; }
+    .launcher-trigger:focus-visible { outline: 2px solid #222; outline-offset: 2px; }
     .launcher-icon {
       display: inline-block;
       font-weight: 300;
