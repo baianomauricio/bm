@@ -56,9 +56,39 @@ ol,ul { padding-left: 1.4rem; }
 .card h2 { margin-top: 0; }
 footer { border-top: 1px solid #d1d1d1; margin-top: 3rem; padding-top: 1rem; color: #555; font-size: .8rem; }
 @media (min-width: 700px) { .wrap { padding: 2rem 2rem 4rem; } }
+
+    /* Curtains wipe transition (vanilla, JS-only). Without JS the overlay
+       stays hidden and navigation is plain. Transform-only panels
+       (composited); the curtain sits above the breadcrumb bar. */
+    .wipe { position: fixed; inset: 0; z-index: 200; display: flex; pointer-events: none; visibility: hidden; transition: visibility 0s linear 480ms; }
+    .wipe-panel { flex: 1; background: #111; transform: translateY(-101%); transition: transform 350ms ease; }
+    .wipe-panel:nth-child(2) { transition-delay: 60ms; }
+    .wipe-panel:nth-child(3) { transition-delay: 120ms; }
+    .wipe.cover { visibility: visible; transition: none; }
+    .wipe.cover .wipe-panel { transform: translateY(0); }
+    html.wipe-in .wipe { visibility: visible; }
+    html.wipe-in .wipe-panel { transform: translateY(0); }
+    @media (prefers-reduced-motion: reduce) {
+      .wipe-panel { transition: none; }
+    }
 </style>
+
+  <script>
+    // Wipe arrival: if the previous page set the flag, start covered; the
+    // main script at the end of <body> lifts the curtain once ready.
+    // The flag is consumed on every load; reduced motion skips the cover.
+    try {
+      if (sessionStorage.getItem("bm-wipe") === "1") {
+        sessionStorage.removeItem("bm-wipe");
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.documentElement.classList.add("wipe-in");
+        }
+      }
+    } catch (e) { /* storage unavailable — plain load, no wipe */ }
+  </script>
 </head>
 <body>
+<div class="wipe" aria-hidden="true"><div class="wipe-panel"></div><div class="wipe-panel"></div><div class="wipe-panel"></div></div>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LXCBNQ3"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -68,5 +98,57 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <main id="main"><p class="eyebrow">Personal interests</p><h1>AI hobby</h1><p>Notes and references on artificial intelligence and prompting.</p><article class="card"><h2><a href="/ai/claude-secret-codes.html">5 secret codes every Claude user should know</a></h2><p>Five prompt shortcuts shared by Outskill, with source attribution and usage notes. The creator's claims are unverified.</p></article></main>
 <footer><p>Personal interests of Mauricio Baiano.</p><a href="/">Home</a> &middot; <a href="/ai/">AI hobby</a></footer>
 </div>
+
+  <script>
+    // Curtains wipe transition (vanilla). Intercepts only plain left-clicks
+    // on same-origin links: no modifiers, no middle-click, no target=_blank,
+    // no anchor-only or download links. Reduced motion: instant navigation.
+    (function () {
+      var wipe = document.querySelector(".wipe");
+      if (!wipe) return;
+
+      function reveal() {
+        document.documentElement.classList.remove("wipe-in");
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { requestAnimationFrame(reveal); });
+      } else {
+        requestAnimationFrame(reveal);
+      }
+      // bfcache restore: a page left covered must come back uncovered.
+      window.addEventListener("pageshow", function (e) {
+        if (e.persisted) {
+          wipe.classList.remove("cover");
+          document.documentElement.classList.remove("wipe-in");
+        }
+      });
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      document.addEventListener("click", function (event) {
+        if (event.defaultPrevented || event.button !== 0
+            || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        if (wipe.classList.contains("cover")) return;
+        var a = event.target && event.target.closest ? event.target.closest("a") : null;
+        if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+        var href = a.getAttribute("href");
+        if (!href || href.charAt(0) === "#") return;
+        var url;
+        try { url = new URL(href, location.href); } catch (err) { return; }
+        if (url.origin !== location.origin) return;
+        if (url.pathname === location.pathname && url.search === location.search) return;
+        event.preventDefault();
+        try { sessionStorage.setItem("bm-wipe", "1"); } catch (err) {}
+        var done = false;
+        function go() { if (!done) { done = true; location.href = url.href; } }
+        var fallback = setTimeout(go, 600);
+        var last = wipe.children[wipe.children.length - 1];
+        if (last) {
+          last.addEventListener("transitionend", function () { clearTimeout(fallback); go(); }, { once: true });
+        }
+        wipe.classList.add("cover");
+      });
+    })();
+  </script>
 </body>
 </html>
