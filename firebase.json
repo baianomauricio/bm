@@ -1,1 +1,1 @@
-{"hosting":{"ignore":["firebase.json","**/.*","**/node_modules/**","**/documentation/**"],"public":"public","site":"baianomauricio-35586"}}
+{"hosting":{"ignore":["firebase.json","**/.*","**/node_modules/**","**/documentation/**"],"public":"public","redirects":[{"destination":"/retirement/planning/family_trust_structure.html","source":"/finance/stocks/family_trust_structure.html","type":301}],"site":"baianomauricio-35586"}}

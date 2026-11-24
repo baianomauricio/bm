@@ -45,9 +45,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     p { color: #777; }
 
-    /* Hobby → Finance launcher: trigger morphs into the menu grid.
+    /* Home-page launchers: trigger morphs into the menu grid.
        The trigger and menu are built by the script below; without JS
-       this mount point stays empty and the page is unchanged. */
+       these mount points stay empty and the page is unchanged. */
     .launcher {
       margin: 2rem auto 0;
       width: 100%;
@@ -174,101 +174,110 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <main>
     <img class="profile-photo" src="/my-photo.jpg" alt="Mauricio Baiano" width="300" height="300">
     <h1>Mauricio Baiano</h1>
-    <p>A new personal site is on its way. Stay tuned. You can catch-up on my hobbies for now.</p>
+    <p>A new personal site is on its way. Stay tuned.<br>You can catch-up on my hobbies for now.</p>
     <div class="launcher" id="launcher"></div>
+    <div class="launcher" id="retirement-launcher"></div>
     <p style="margin-top:2rem;font-size:0.8rem;color:#aaa">&copy; 2026</p>
   </main>
 
   <script>
-    // Hobby → Finance launcher (FR-01–FR-06). Vanilla JS + CSS only — the
+    // Home-page launchers (FR-01–FR-06). Vanilla JS + CSS only — the
     // change request's React/Motion references are pattern inspiration.
     // Links are data-driven (FR-03): adding a page is one array entry.
-    // Finance pages only — the AI pages are a separate group later.
+    // One builder serves both groups; each keeps its own open state.
     const FINANCE_LINKS = [
       { label: "Candlestick Patterns & MACD Signals", href: "/finance/stocks/chart_pattern.html" },
-      { label: "S&P 500 Returns After Major World Events", href: "/finance/stocks/market_recovery.html" },
-      { label: "Family Trust Structure", href: "/finance/stocks/family_trust_structure.html" }
+      { label: "S&P 500 Returns After Major World Events", href: "/finance/stocks/market_recovery.html" }
     ];
 
-    const launcher = document.getElementById("launcher");
+    const RETIREMENT_LINKS = [
+      { label: "Family Trust Structure", href: "/retirement/planning/family_trust_structure.html" }
+    ];
 
-    const trigger = document.createElement("button");
-    trigger.className = "launcher-trigger";
-    trigger.type = "button";
-    trigger.setAttribute("aria-expanded", "false");
-    trigger.setAttribute("aria-controls", "launcher-menu");
+    function buildLauncher(containerId, menuId, triggerText, links) {
+      const launcher = document.getElementById(containerId);
 
-    const triggerLabel = document.createElement("span");
-    triggerLabel.textContent = "Hobby → Finance";
-    trigger.appendChild(triggerLabel);
-
-    const triggerIcon = document.createElement("span");
-    triggerIcon.className = "launcher-icon";
-    triggerIcon.setAttribute("aria-hidden", "true");
-    triggerIcon.textContent = "+";
-    trigger.appendChild(triggerIcon);
-
-    const menu = document.createElement("div");
-    menu.className = "launcher-menu";
-    menu.id = "launcher-menu";
-    menu.hidden = true;
-
-    const list = document.createElement("ul");
-    const linkEls = FINANCE_LINKS.map((entry) => {
-      const li = document.createElement("li");
-      const a = document.createElement("a");
-      a.href = entry.href;
-      a.textContent = entry.label;
-      li.appendChild(a);
-      list.appendChild(li);
-      return a;
-    });
-    menu.appendChild(list);
-
-    launcher.appendChild(trigger);
-    launcher.appendChild(menu);
-
-    let expanded = false;
-
-    function prefersReducedMotion() {
-      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    }
-
-    function expand() {
-      expanded = true;
-      trigger.setAttribute("aria-expanded", "true");
-      menu.hidden = false;
-      // Next frame so the clip-path transition runs from the collapsed state.
-      requestAnimationFrame(() => launcher.classList.add("open"));
-      if (linkEls[0]) linkEls[0].focus();
-    }
-
-    function collapse(returnFocus) {
-      expanded = false;
+      const trigger = document.createElement("button");
+      trigger.className = "launcher-trigger";
+      trigger.type = "button";
       trigger.setAttribute("aria-expanded", "false");
-      launcher.classList.remove("open");
-      if (prefersReducedMotion()) {
-        menu.hidden = true;
-      } else {
-        menu.addEventListener("transitionend", function hideMenu() {
-          menu.hidden = true;
-        }, { once: true });
+      trigger.setAttribute("aria-controls", menuId);
+
+      const triggerLabel = document.createElement("span");
+      triggerLabel.textContent = triggerText;
+      trigger.appendChild(triggerLabel);
+
+      const triggerIcon = document.createElement("span");
+      triggerIcon.className = "launcher-icon";
+      triggerIcon.setAttribute("aria-hidden", "true");
+      triggerIcon.textContent = "+";
+      trigger.appendChild(triggerIcon);
+
+      const menu = document.createElement("div");
+      menu.className = "launcher-menu";
+      menu.id = menuId;
+      menu.hidden = true;
+
+      const list = document.createElement("ul");
+      const linkEls = links.map((entry) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = entry.href;
+        a.textContent = entry.label;
+        li.appendChild(a);
+        list.appendChild(li);
+        return a;
+      });
+      menu.appendChild(list);
+
+      launcher.appendChild(trigger);
+      launcher.appendChild(menu);
+
+      let expanded = false;
+
+      function prefersReducedMotion() {
+        return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       }
-      if (returnFocus) trigger.focus();
+
+      function expand() {
+        expanded = true;
+        trigger.setAttribute("aria-expanded", "true");
+        menu.hidden = false;
+        // Next frame so the clip-path transition runs from the collapsed state.
+        requestAnimationFrame(() => launcher.classList.add("open"));
+        if (linkEls[0]) linkEls[0].focus();
+      }
+
+      function collapse(returnFocus) {
+        expanded = false;
+        trigger.setAttribute("aria-expanded", "false");
+        launcher.classList.remove("open");
+        if (prefersReducedMotion()) {
+          menu.hidden = true;
+        } else {
+          menu.addEventListener("transitionend", function hideMenu() {
+            menu.hidden = true;
+          }, { once: true });
+        }
+        if (returnFocus) trigger.focus();
+      }
+
+      trigger.addEventListener("click", () => {
+        if (expanded) collapse(true);
+        else expand();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && expanded) collapse(true);
+      });
+
+      document.addEventListener("click", (event) => {
+        if (expanded && !launcher.contains(event.target)) collapse(true);
+      });
     }
 
-    trigger.addEventListener("click", () => {
-      if (expanded) collapse(true);
-      else expand();
-    });
-
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && expanded) collapse(true);
-    });
-
-    document.addEventListener("click", (event) => {
-      if (expanded && !launcher.contains(event.target)) collapse(true);
-    });
+    buildLauncher("launcher", "launcher-menu", "Hobby → Finance", FINANCE_LINKS);
+    buildLauncher("retirement-launcher", "retirement-launcher-menu", "Retirement → Planning", RETIREMENT_LINKS);
   </script>
 
   <script>
