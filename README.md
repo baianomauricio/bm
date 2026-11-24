@@ -12,7 +12,7 @@ This site is the personal member of a three-site collection: [mauriciosilva.com]
 
 | Route | Content |
 |---|---|
-| `/` | Holding page — minimal, with Hobby → Finance and Retirement → Planning expandable launchers linking the finance and retirement pages |
+| `/` | Holding page — minimal, with Hobby → Finance and Retirement → Planning expandable launchers side by side, linking the finance and retirement pages |
 | `/finance/stocks/chart_pattern.html` | Bearish Candlestick Patterns reference - 16 pattern cards with example charts, plus a MACD Indicator section (signal line crossover, divergence, centerline crossover — bullish and bearish) |
 | `/finance/stocks/market_recovery.html` | Market Shocks & Recovery - S&P 500 returns 1 and 12 months after 28 major world events, 1940–2026, with sparklines and a near-a-recession column (source: LPL Financial; three rows computed from index closes) |
 | `/retirement/planning/family_trust_structure.html` | Family Trust Structure - ownership, management, succession and separate business risks; grantor, family trust, holding company and separate LLCs diagram (source: The Marathon Group) |

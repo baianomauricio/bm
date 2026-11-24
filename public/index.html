@@ -48,9 +48,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     /* Home-page launchers: trigger morphs into the menu grid.
        The trigger and menu are built by the script below; without JS
        these mount points stay empty and the page is unchanged. */
+    .launchers {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      align-items: flex-start;
+      margin-top: 2rem;
+    }
     .launcher {
-      margin: 2rem auto 0;
-      width: 100%;
+      margin: 0;
+      flex: 1 1 280px;
       max-width: 480px;
     }
     .launcher-trigger {
@@ -175,8 +183,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <img class="profile-photo" src="/my-photo.jpg" alt="Mauricio Baiano" width="300" height="300">
     <h1>Mauricio Baiano</h1>
     <p>A new personal site is on its way. Stay tuned.<br>You can catch-up on my hobbies for now.</p>
-    <div class="launcher" id="launcher"></div>
-    <div class="launcher" id="retirement-launcher"></div>
+    <div class="launchers">
+      <div class="launcher" id="launcher"></div>
+      <div class="launcher" id="retirement-launcher"></div>
+    </div>
     <p style="margin-top:2rem;font-size:0.8rem;color:#aaa">&copy; 2026</p>
   </main>
 
