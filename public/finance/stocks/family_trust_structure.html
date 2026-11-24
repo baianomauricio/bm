@@ -366,6 +366,133 @@
     }
     .credit a:hover { color: #102f58; }
 
+    /* "A right-sized alternative" section: vertical stepper. Gated
+       stages (3–6, added only when the situation calls for it) get a
+       red number badge; the always-applicable stages get a black one. */
+    .alt {
+      margin-top: 32px;
+    }
+    .alt h2 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .alt-label {
+      margin-top: 10px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--muted-color);
+    }
+    .stages {
+      margin-top: 8px;
+      list-style: none;
+      position: relative;
+    }
+    .stages::before {
+      content: "";
+      position: absolute;
+      left: 16px;
+      top: 24px;
+      bottom: 24px;
+      width: 2px;
+      background: var(--line-color);
+    }
+    .stage {
+      position: relative;
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-top: 1px solid var(--line-color);
+    }
+    .stage:first-child {
+      border-top: 0;
+    }
+    .stage-num {
+      flex: 0 0 34px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #111;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .stage-gated .stage-num {
+      background: var(--red);
+    }
+    .stage-body {
+      min-width: 0;
+    }
+    .stage-title {
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.35;
+    }
+    .stage-gate {
+      color: var(--red);
+    }
+    .stage-desc {
+      margin-top: 3px;
+      font-size: 14.5px;
+      line-height: 1.55;
+    }
+    .alt-close {
+      margin-top: 16px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .fn-ref {
+      font-size: 11px;
+      line-height: 0;
+    }
+    .fn-ref a {
+      color: var(--red);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .fn-ref a:hover { text-decoration: underline; }
+    .footnotes {
+      margin-top: 20px;
+      padding-left: 20px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      color: var(--muted-color);
+    }
+    .footnotes li + li {
+      margin-top: 8px;
+    }
+    .footnotes a {
+      color: #234f86;
+      text-underline-offset: .17em;
+    }
+    .alt h3 {
+      margin-top: 24px;
+      font-size: 15px;
+      font-weight: 800;
+    }
+    .sources-list {
+      margin-top: 8px;
+      padding-left: 20px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+    .sources-list li + li {
+      margin-top: 6px;
+    }
+    .sources-list a {
+      color: #234f86;
+      text-underline-offset: .17em;
+    }
+    .alt-disclaimer {
+      margin-top: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--muted-color);
+    }
+
     @media (max-width: 640px) {
       body {
         padding: 28px 12px;
@@ -673,6 +800,81 @@
       <p>Start with the three questions the map answers: who owns it, who manages it, and who benefits from it. The grantor creates and funds the family trust, the trustee holds legal title to the holding-company interests, and the beneficiaries receive benefits under the trust's distribution rules.</p>
       <p>The trust sets the administration, succession, and distribution rules — including a successor trustee for continuity — while the appointed manager runs the holding company day to day. Each subsidiary LLC holds a separate slice of the business, so operating risks, property, and equipment or IP stay in their own boxes.</p>
       <p>A structure only works once it is put into practice: signed transfers of the LLC interests into the trust, proper funding, separate accounts, and consistent recordkeeping. The Marathon Group helps business owners and families assess existing arrangements and coordinate with their legal and tax professionals.</p>
+    </section>
+
+    <section class="alt" aria-label="A right-sized alternative">
+      <h2>A right-sized alternative</h2>
+      <p class="alt-label">My own design, not from the post — a staged version of the same idea, sized for someone building wealth rather than running a $15M rental business. Each layer is added only when the situation calls for it; most people stop at layer 3.</p>
+      <ol class="stages">
+        <li class="stage">
+          <span class="stage-num" aria-hidden="true">0</span>
+          <div class="stage-body">
+            <p class="stage-title">Umbrella insurance ($1–5M)</p>
+            <p class="stage-desc">First line of defense; a few hundred dollars a year. Cheapest protection there is.</p>
+          </div>
+        </li>
+        <li class="stage">
+          <span class="stage-num" aria-hidden="true">1</span>
+          <div class="stage-body">
+            <p class="stage-title">Revocable living trust</p>
+            <p class="stage-desc">Home + personal assets; avoids probate. You stay trustee and beneficiary, so you keep full control; it is an estate tool, not an asset-protection tool.<sup class="fn-ref"><a href="#fn2">2</a></sup></p>
+          </div>
+        </li>
+        <li class="stage">
+          <span class="stage-num" aria-hidden="true">2</span>
+          <div class="stage-body">
+            <p class="stage-title">401(k) + IRA</p>
+            <p class="stage-desc">Creditor protection built in (ERISA for the 401(k), state exemptions for IRAs). No entity needed.</p>
+          </div>
+        </li>
+        <li class="stage stage-gated">
+          <span class="stage-num" aria-hidden="true">3</span>
+          <div class="stage-body">
+            <p class="stage-title">One LLC per property, <span class="stage-gate">only if you buy rentals</span></p>
+            <p class="stage-desc">Or one per few properties while the portfolio is small. This is the first entity you actually need.<sup class="fn-ref"><a href="#fn3">3</a></sup></p>
+          </div>
+        </li>
+        <li class="stage stage-gated">
+          <span class="stage-num" aria-hidden="true">4</span>
+          <div class="stage-body">
+            <p class="stage-title">Split <span class="stage-gate">short-term rentals only</span></p>
+            <p class="stage-desc">Operating LLC + Real Estate LLC, because guest liability is real. Long-term rentals don't need the split.</p>
+          </div>
+        </li>
+        <li class="stage stage-gated">
+          <span class="stage-num" aria-hidden="true">5</span>
+          <div class="stage-body">
+            <p class="stage-title">Holding company, <span class="stage-gate">only when the portfolio justifies it</span></p>
+            <p class="stage-desc">One more layer once there are enough LLCs to coordinate.<sup class="fn-ref"><a href="#fn4">4</a></sup></p>
+          </div>
+        </li>
+        <li class="stage stage-gated">
+          <span class="stage-num" aria-hidden="true">6</span>
+          <div class="stage-body">
+            <p class="stage-title">Irrevocable trust, <span class="stage-gate">only near estate-tax territory</span></p>
+            <p class="stage-desc">Around $15M per person.<sup class="fn-ref"><a href="#fn1">1</a></sup> And only with an independent trustee, because the protection only holds if you genuinely give up control.</p>
+          </div>
+        </li>
+      </ol>
+      <p class="alt-close">Two disciplines from the Marathon Group diagram apply at every stage: answer the governance questions explicitly — who manages, who succeeds the trustee, which state's law governs — and follow the implementation checklist: assign the interests, get the consents, update the records, administer. And whatever stage you reach, fund it: an unfunded trust owns nothing.</p>
+      <ol class="footnotes">
+        <li id="fn1">Estate-tax exemption: $15M per person ($30M married) from January 1, 2026, permanent under the One Big Beautiful Bill Act, indexed for inflation thereafter. Sources: <a href="https://www.irs.gov/businesses/small-businesses-self-employed/estate-and-gift-taxes" target="_blank" rel="noopener">IRS, Estate and gift taxes</a>; <a href="https://www.schwab.com/learn/story/one-big-beautiful-bill-act-tax-cuts" target="_blank" rel="noopener">Schwab, One Big Beautiful Bill Act</a>.</li>
+        <li id="fn2">A revocable trust does not shield assets from the settlor's creditors — the diagram's own footnote on this page says the same. Source: <a href="https://www.irs.gov/businesses/small-businesses-self-employed/estate-and-gift-taxes" target="_blank" rel="noopener">IRS, Estate and gift taxes</a>.</li>
+        <li id="fn3">LLC tax classification: by default a single-member LLC is disregarded and a multi-member LLC is a partnership; elect corporate or S-corp treatment with Form 8832 / Form 2553. Sources: <a href="https://www.irs.gov/businesses/small-businesses-self-employed/limited-liability-company-llc" target="_blank" rel="noopener">IRS, Limited liability company (LLC)</a>; <a href="https://www.irs.gov/pub/irs-pdf/p3402.pdf" target="_blank" rel="noopener">IRS Publication 3402 (PDF)</a>.</li>
+        <li id="fn4">S-corporation limits: a holding LLC cannot own S-corp stock, and only certain trusts (QSST/ESBT) can hold it — check the election rules before placing a business in this structure. Source: <a href="https://www.irs.gov/businesses/small-businesses-self-employed/s-corporations" target="_blank" rel="noopener">IRS, S corporations</a>.</li>
+      </ol>
+      <h3>Sources &amp; further reading</h3>
+      <ul class="sources-list">
+        <li>The diagram this page reproduces: <a href="https://www.instagram.com/p/DfsiUuTT-1B/" target="_blank" rel="noopener">The Marathon Group (@ricoramirez86), Instagram, November 13, 2026</a></li>
+        <li>The contrasting chart this proposal responds to: <a href="https://www.instagram.com/reel/DekqiTABKgM/" target="_blank" rel="noopener">@thelegacyinvestingshow, "How To Own Nothing &amp; Control Everything!", October 16, 2026</a></li>
+        <li><a href="https://www.irs.gov/businesses/small-businesses-self-employed/estate-and-gift-taxes" target="_blank" rel="noopener">IRS, Estate and gift taxes</a></li>
+        <li><a href="https://www.irs.gov/businesses/small-businesses-self-employed/limited-liability-company-llc" target="_blank" rel="noopener">IRS, Limited liability company (LLC)</a></li>
+        <li><a href="https://www.irs.gov/businesses/small-businesses-self-employed/s-corporations" target="_blank" rel="noopener">IRS, S corporations</a></li>
+        <li><a href="https://www.irs.gov/pub/irs-pdf/p3402.pdf" target="_blank" rel="noopener">IRS Publication 3402, Tax Issues for Limited Liability Companies (PDF)</a></li>
+        <li><a href="https://www.schwab.com/learn/story/one-big-beautiful-bill-act-tax-cuts" target="_blank" rel="noopener">One Big Beautiful Bill Act, $15M estate exemption explainer (Schwab)</a></li>
+        <li>Florida: trust law | Florida: LLC law — as printed in the diagram's sources line; no links (no official statute URLs verified).</li>
+      </ul>
+      <p class="alt-disclaimer">This section is research, not legal or tax advice — talk to a lawyer and a CPA before acting.</p>
     </section>
 
     <p class="credit">Diagram: <a href="https://www.instagram.com/p/DfsiUuTT-1B/" target="_blank" rel="noopener">The Marathon Group (@ricoramirez86), Instagram, November 13, 2026</a></p>
