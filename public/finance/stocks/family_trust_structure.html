@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-5LXCBNQ3');</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Family Trust Structure — Ownership, Management, Succession &amp; Separate Business Risks</title>
+  <meta name="description" content="How a family trust, holding company, and separate LLCs fit together — who owns it, who manages it, and who benefits from it. Based on The Marathon Group's structure map." />
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BRBDZ471ZV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-BRBDZ471ZV');
+  </script>
+  <style>
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #111111;
+      --muted-color: #555555;
+      --line-color: #dddddd;
+      --red: #b01e2e;
+      --red-tint: #fdf0f1;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .page {
+      max-width: 1020px;
+      width: 100%;
+    }
+
+    h1 {
+      font-size: 32px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      text-align: center;
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      font-size: 17px;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    /* Source header block (mirrors the diagram's own header; the
+       crest/shield logo is not reproduced — plain text credit only). */
+    .source-head {
+      border-top: 3px solid var(--red);
+      padding-top: 10px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .source-head-name {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+    }
+    .source-head-sub {
+      margin-top: 2px;
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--muted-color);
+    }
+    .source-head-right {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      color: var(--red);
+      white-space: nowrap;
+    }
+
+    /* Legend: solid red = ownership, dashed grey = management,
+       dotted grey = design note. */
+    .legend {
+      margin-top: 28px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px 28px;
+      font-size: 13px;
+      color: var(--muted-color);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+    }
+    .legend-item svg {
+      display: block;
+    }
+
+    /* Diagram grid: 5 columns on desktop — box, connector, box,
+       connector, box. On mobile it collapses to a single column in
+       DOM order, and the horizontal connectors become vertical ones
+       (same labels, same line styles). */
+    .diagram {
+      margin-top: 24px;
+      display: grid;
+      grid-template-columns: 1fr 56px 1fr 56px 1fr;
+      align-items: stretch;
+    }
+    .diagram > * {
+      min-width: 0;
+    }
+    .g-c1 { grid-column: 1; }
+    .g-c2 { grid-column: 2; }
+    .g-c3 { grid-column: 3; }
+    .g-c4 { grid-column: 4; }
+    .g-c5 { grid-column: 5; }
+    .g-span { grid-column: 1 / -1; }
+    .g-r1 { grid-row: 1; }
+    .g-r2 { grid-row: 2; }
+    .g-r3 { grid-row: 3; }
+    .g-r4 { grid-row: 4; }
+    .g-r5 { grid-row: 5; }
+    .g-r6 { grid-row: 6; }
+    .g-r7 { grid-row: 7; }
+    .g-r8 { grid-row: 8; }
+    .g-r9 { grid-row: 9; }
+
+    .box {
+      border-radius: 8px;
+      padding: 14px 16px;
+      text-align: center;
+    }
+    .box-title {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      line-height: 1.25;
+    }
+    .box-line {
+      margin-top: 6px;
+      font-size: 13.5px;
+      line-height: 1.45;
+    }
+    .box-line-small {
+      margin-top: 8px;
+      font-size: 12px;
+      line-height: 1.45;
+      opacity: 0.85;
+    }
+    .box-black {
+      background: #111;
+      color: #fff;
+    }
+    .box-grey {
+      background: #f5f5f5;
+      color: #111;
+    }
+    .box-grey .box-title {
+      color: var(--red);
+    }
+    .box-trust {
+      background: #fff;
+      border: 2px solid var(--red);
+    }
+    .box-trust .box-title {
+      color: var(--red);
+    }
+    .box-holding {
+      border-top: 4px solid var(--red);
+    }
+
+    /* Connector labels: small, centred, above the line/arrow. */
+    .conn-label {
+      display: block;
+      font-size: 12px;
+      line-height: 1.3;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .conn-red .conn-label { color: var(--red); }
+    .conn-grey .conn-label { color: var(--muted-color); }
+
+    /* Vertical connectors between tiers. */
+    .vconn {
+      padding: 8px 0;
+      text-align: center;
+    }
+    .vconn svg {
+      display: block;
+      margin: 0 auto;
+    }
+
+    /* Horizontal connectors between boxes in a tier. The vertical
+       variant is shown only on mobile (see media query). */
+    .hconn {
+      align-self: center;
+      text-align: center;
+      padding: 0 2px;
+    }
+    .hconn svg {
+      display: block;
+      margin: 0 auto;
+    }
+    .hconn-v {
+      display: none;
+    }
+
+    /* Branch: Holding Company LLC down to the three subsidiary LLCs.
+       One stem from the centre, one bar across the outer column
+       centres, three drops. The bar spans from the centre of column 1
+       to the centre of column 5: each side inset is (100% - 112px) / 6. */
+    .branch {
+      padding: 8px 0 0;
+      text-align: center;
+    }
+    .branch-stem {
+      width: 2px;
+      height: 14px;
+      background: var(--red);
+      margin: 0 auto;
+    }
+    .branch-bar {
+      height: 2px;
+      background: var(--red);
+      margin: 0 calc((100% - 112px) / 6);
+    }
+    .branch-drops {
+      display: grid;
+      grid-template-columns: 1fr 56px 1fr 56px 1fr;
+    }
+    .branch-drops .drop:nth-child(1) { grid-column: 1; }
+    .branch-drops .drop:nth-child(2) { grid-column: 3; }
+    .branch-drops .drop:nth-child(3) { grid-column: 5; }
+    .drop {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .drop-line {
+      width: 2px;
+      height: 12px;
+      background: var(--red);
+    }
+    .drop-arrow {
+      width: 0;
+      height: 0;
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 8px solid var(--red);
+    }
+
+    /* Implementation band. */
+    .impl {
+      margin-top: 28px;
+      background: var(--red-tint);
+      border: 1px solid #f3d2d5;
+      border-radius: 8px;
+      padding: 20px 20px 22px;
+    }
+    .impl h2 {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-align: center;
+    }
+    .impl-steps {
+      margin-top: 16px;
+      display: flex;
+      align-items: stretch;
+    }
+    .impl-step {
+      flex: 1;
+      text-align: center;
+      min-width: 0;
+    }
+    .impl-num {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--red);
+      letter-spacing: 0.06em;
+    }
+    .impl-title {
+      margin-top: 2px;
+      font-size: 13.5px;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      line-height: 1.3;
+    }
+    .impl-desc {
+      margin-top: 4px;
+      font-size: 13px;
+      line-height: 1.45;
+      color: var(--muted-color);
+    }
+    .impl-chev {
+      align-self: center;
+      padding: 0 8px;
+      font-size: 26px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--red);
+    }
+
+    .footnote {
+      margin-top: 20px;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--muted-color);
+    }
+
+    .sources-row {
+      margin-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 13px;
+      color: var(--muted-color);
+    }
+    .reviewed {
+      white-space: nowrap;
+    }
+
+    .howto {
+      margin-top: 32px;
+    }
+    .howto h2 {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+    }
+    .howto p {
+      margin-top: 10px;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .credit {
+      margin-top: 20px;
+      font-size: 14px;
+      line-height: 1.5;
+      color: var(--muted-color);
+    }
+    .credit a {
+      color: #234f86;
+      text-underline-offset: .17em;
+    }
+    .credit a:hover { color: #102f58; }
+
+    @media (max-width: 640px) {
+      body {
+        padding: 28px 12px;
+      }
+
+      h1 {
+        font-size: 24px;
+      }
+
+      .source-head {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .legend {
+        justify-content: flex-start;
+      }
+      .legend-item {
+        white-space: normal;
+      }
+
+      /* Single column: every diagram item stacks in DOM order. */
+      .diagram {
+        grid-template-columns: 1fr;
+      }
+      .diagram > * {
+        grid-column: 1 !important;
+        grid-row: auto !important;
+      }
+      .hconn {
+        padding: 8px 0;
+      }
+      .hconn-h {
+        display: none;
+      }
+      .hconn-v {
+        display: block;
+      }
+      /* Branch on mobile: a single centred arrow (the bar and the
+         outer drops have no column to branch to). */
+      .branch-bar {
+        display: none;
+      }
+      .branch-drops {
+        display: block;
+      }
+      .branch-drops .drop:nth-child(1),
+      .branch-drops .drop:nth-child(3) {
+        display: none;
+      }
+
+      .impl-steps {
+        flex-direction: column;
+      }
+      .impl-chev {
+        transform: rotate(90deg);
+        padding: 6px 0;
+      }
+      .sources-row {
+        flex-direction: column;
+        gap: 4px;
+      }
+    }
+
+    /* Fixed breadcrumb bar (site-wide): 25px, full width, above content.
+       The bar scrolls horizontally on narrow screens; the page itself
+       never gains horizontal overflow. */
+    .breadcrumb-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 25px; z-index: 100;
+      display: flex; align-items: center; gap: 8px; padding: 0 12px;
+      overflow-x: auto; white-space: nowrap; scrollbar-width: none;
+      background: #fff; border-bottom: 1px solid #ddd;
+      font-size: 12px; line-height: 25px;
+    }
+    .breadcrumb-bar::-webkit-scrollbar { display: none; }
+    .breadcrumb-bar a { color: #234f86; text-underline-offset: .17em; }
+    .breadcrumb-bar a:hover { color: #102f58; }
+    .breadcrumb-bar a:focus-visible { outline: 2px solid #234f86; outline-offset: 2px; }
+
+    /* Curtains wipe transition (vanilla, JS-only). Without JS the overlay
+       stays hidden and navigation is plain. Transform-only panels
+       (composited); the curtain sits above the breadcrumb bar. */
+    .wipe { position: fixed; inset: 0; z-index: 200; display: flex; pointer-events: none; visibility: hidden; transition: visibility 0s linear 480ms; }
+    .wipe-panel { flex: 1; background: #111; transform: translateY(-120%) skewY(12deg); transition: transform 350ms ease; height: calc(100% + 14.2vw); margin-top: -7.1vw; }
+    .wipe-panel:nth-child(2) { transition-delay: 60ms; }
+    .wipe-panel:nth-child(3) { transition-delay: 120ms; }
+    .wipe.cover { visibility: visible; transition: none; }
+    .wipe.cover .wipe-panel { transform: translateY(0) skewY(12deg); }
+    html.wipe-in .wipe { visibility: visible; }
+    html.wipe-in .wipe-panel { transform: translateY(0) skewY(12deg); }
+    @media (prefers-reduced-motion: reduce) {
+      .wipe-panel { transition: none; }
+    }
+  </style>
+
+  <script>
+    // Wipe arrival: if the previous page set the flag, start covered; the
+    // main script at the end of <body> lifts the curtain once ready.
+    // The flag is consumed on every load; reduced motion skips the cover.
+    try {
+      if (sessionStorage.getItem("bm-wipe") === "1") {
+        sessionStorage.removeItem("bm-wipe");
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.documentElement.classList.add("wipe-in");
+        }
+      }
+    } catch (e) { /* storage unavailable — plain load, no wipe */ }
+  </script>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LXCBNQ3"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+<div class="wipe" aria-hidden="true"><div class="wipe-panel"></div><div class="wipe-panel"></div><div class="wipe-panel"></div></div>
+<nav class="breadcrumb-bar" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Finance</span><span aria-hidden="true">/</span><span>Stocks</span><span aria-hidden="true">/</span><span aria-current="page">Family Trust Structure</span></nav>
+
+  <main class="page">
+    <div class="source-head">
+      <div>
+        <p class="source-head-name">THE MARATHON GROUP</p>
+        <p class="source-head-sub">WEALTH | LEGACY | BUSINESS</p>
+      </div>
+      <p class="source-head-right">STRUCTURE MAP</p>
+    </div>
+
+    <h1>Family Trust Structure</h1>
+    <p class="subtitle">A connected framework for ownership, management, succession, and separate business risks.</p>
+
+    <div class="legend">
+      <span class="legend-item"><svg width="36" height="8" viewBox="0 0 36 8" aria-hidden="true"><line x1="1" y1="4" x2="35" y2="4" stroke="#b01e2e" stroke-width="2"/></svg> Ownership / funding / benefits</span>
+      <span class="legend-item"><svg width="36" height="8" viewBox="0 0 36 8" aria-hidden="true"><line x1="1" y1="4" x2="35" y2="4" stroke="#999" stroke-width="2" stroke-dasharray="6 4"/></svg> Management authority</span>
+      <span class="legend-item"><svg width="36" height="8" viewBox="0 0 36 8" aria-hidden="true"><line x1="1" y1="4" x2="35" y2="4" stroke="#999" stroke-width="2" stroke-dasharray="1.5 5" stroke-linecap="round"/></svg> Design note</span>
+    </div>
+
+    <div class="diagram" aria-label="Family trust structure map">
+      <!-- Shared arrowheads for the SVG connectors. -->
+      <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+        <defs>
+          <marker id="arr-red" viewBox="0 0 10 10" refX="5" refY="8" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,0 L5,9 z" fill="#b01e2e"/></marker>
+          <marker id="arr-grey" viewBox="0 0 10 10" refX="5" refY="8" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,0 L5,9 z" fill="#999"/></marker>
+        </defs>
+      </svg>
+
+      <!-- Tier 1 -->
+      <div class="box box-black g-c3 g-r1">
+        <p class="box-title">GRANTOR / SETTLOR</p>
+        <p class="box-line">Creates and funds the trust.</p>
+      </div>
+
+      <!-- Grantor → Family Trust -->
+      <div class="vconn conn-red g-span g-r2">
+        <span class="conn-label">establishes &amp; funds</span>
+        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
+      </div>
+
+      <!-- Tier 2 -->
+      <div class="box box-grey g-c1 g-r3">
+        <p class="box-title">TRUST DESIGN</p>
+        <p class="box-line">Revocable: flexible control</p>
+        <p class="box-line">Irrevocable: defined limits</p>
+        <p class="box-line">Tax status is assessed separately.</p>
+      </div>
+      <div class="hconn conn-grey g-c2 g-r3">
+        <svg class="hconn-h" width="52" height="12" viewBox="0 0 52 12" aria-hidden="true"><line x1="1" y1="6" x2="51" y2="6" stroke="#999" stroke-width="2" stroke-dasharray="1.5 5" stroke-linecap="round"/></svg>
+        <svg class="hconn-v" width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="28" stroke="#999" stroke-width="2" stroke-dasharray="1.5 5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="box box-trust g-c3 g-r3">
+        <p class="box-title">FAMILY TRUST</p>
+        <p class="box-line">Trustee holds legal title to the LLC interests and follows the trust agreement.</p>
+        <p class="box-line-small">Successor trustee provides continuity.</p>
+      </div>
+      <div class="hconn conn-red g-c4 g-r3">
+        <span class="conn-label">benefits</span>
+        <svg class="hconn-h" width="52" height="12" viewBox="0 0 52 12" aria-hidden="true"><line x1="1" y1="6" x2="44" y2="6" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
+        <svg class="hconn-v" width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
+      </div>
+      <div class="box box-grey g-c5 g-r3">
+        <p class="box-title">BENEFICIARIES</p>
+        <p class="box-line">Receive benefits under the trust's distribution rules.</p>
+      </div>
+
+      <!-- Family Trust → Holding Company LLC -->
+      <div class="vconn conn-red g-span g-r4">
+        <span class="conn-label">LLC interests held in trust</span>
+        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
+      </div>
+
+      <!-- Tier 3 -->
+      <div class="box box-grey g-c1 g-r5">
+        <p class="box-title">APPOINTED MANAGER</p>
+        <p class="box-line">Runs the LLC under delegated powers.</p>
+        <p class="box-line">Owner or appointed third party.</p>
+      </div>
+      <div class="hconn conn-grey g-c2 g-r5">
+        <span class="conn-label">runs</span>
+        <svg class="hconn-h" width="52" height="12" viewBox="0 0 52 12" aria-hidden="true"><line x1="1" y1="6" x2="44" y2="6" stroke="#999" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr-grey)"/></svg>
+        <svg class="hconn-v" width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22" stroke="#999" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr-grey)"/></svg>
+      </div>
+      <div class="box box-black box-holding g-c3 g-r5">
+        <p class="box-title">HOLDING COMPANY LLC</p>
+        <p class="box-line">Owns equity in the subsidiaries.</p>
+        <p class="box-line">Operating agreement sets voting, distributions, and succession.</p>
+      </div>
+      <div class="hconn conn-grey g-c4 g-r5">
+        <svg class="hconn-h" width="52" height="12" viewBox="0 0 52 12" aria-hidden="true"><line x1="1" y1="6" x2="51" y2="6" stroke="#999" stroke-width="2" stroke-dasharray="1.5 5" stroke-linecap="round"/></svg>
+        <svg class="hconn-v" width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="28" stroke="#999" stroke-width="2" stroke-dasharray="1.5 5" stroke-linecap="round"/></svg>
+      </div>
+      <div class="box box-grey g-c5 g-r5">
+        <p class="box-title">GOVERNING LAW</p>
+        <p class="box-line">Trust jurisdiction and LLC formation state are separate choices.</p>
+      </div>
+
+      <!-- Holding Company LLC → the three subsidiary LLCs -->
+      <div class="branch conn-red g-span g-r6">
+        <span class="conn-label">owns subsidiary equity</span>
+        <div class="branch-stem" aria-hidden="true"></div>
+        <div class="branch-bar" aria-hidden="true"></div>
+        <div class="branch-drops" aria-hidden="true">
+          <div class="drop"><span class="drop-line"></span><span class="drop-arrow"></span></div>
+          <div class="drop"><span class="drop-line"></span><span class="drop-arrow"></span></div>
+          <div class="drop"><span class="drop-line"></span><span class="drop-arrow"></span></div>
+        </div>
+      </div>
+
+      <!-- Tier 4 + Tier 5 (paired in DOM order so the mobile stack keeps each LLC above its assets box) -->
+      <div class="box box-black g-c1 g-r7">
+        <p class="box-title">OPERATING LLC</p>
+        <p class="box-line">Conducts the active business.</p>
+      </div>
+      <div class="vconn conn-red g-c1 g-r8">
+        <span class="conn-label">runs</span>
+        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
+      </div>
+      <div class="box box-grey g-c1 g-r9">
+        <p class="box-title">BUSINESS OPERATIONS</p>
+        <p class="box-line">Contracts and employees</p>
+        <p class="box-line">Operating accounts and licenses</p>
+      </div>
+      <div class="box box-black g-c3 g-r7">
+        <p class="box-title">REAL ESTATE LLC</p>
+        <p class="box-line">Holds separately titled property.</p>
+      </div>
+      <div class="vconn conn-red g-c3 g-r8">
+        <span class="conn-label">holds</span>
+        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
+      </div>
+      <div class="box box-grey g-c3 g-r9">
+        <p class="box-title">PROPERTY ASSETS</p>
+        <p class="box-line">Deeded real estate</p>
+        <p class="box-line">Leases, debt, and insurance</p>
+      </div>
+      <div class="box box-black g-c5 g-r7">
+        <p class="box-title">ASSET / IP LLC</p>
+        <p class="box-line">Holds selected equipment or IP.</p>
+      </div>
+      <div class="vconn conn-red g-c5 g-r8">
+        <span class="conn-label">holds</span>
+        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
+      </div>
+      <div class="box box-grey g-c5 g-r9">
+        <p class="box-title">ASSETS &amp; RIGHTS</p>
+        <p class="box-line">Equipment or IP ownership</p>
+        <p class="box-line">Written leases or licenses</p>
+      </div>
+    </div>
+
+    <section class="impl" aria-label="Implementation and ongoing controls">
+      <h2>IMPLEMENTATION &amp; ONGOING CONTROLS</h2>
+      <div class="impl-steps">
+        <div class="impl-step">
+          <p class="impl-num">01</p>
+          <p class="impl-title">ASSIGN INTERESTS</p>
+          <p class="impl-desc">Signed transfer documents</p>
+        </div>
+        <span class="impl-chev" aria-hidden="true">›</span>
+        <div class="impl-step">
+          <p class="impl-num">02</p>
+          <p class="impl-title">OBTAIN CONSENTS</p>
+          <p class="impl-desc">Member / lender approvals</p>
+        </div>
+        <span class="impl-chev" aria-hidden="true">›</span>
+        <div class="impl-step">
+          <p class="impl-num">03</p>
+          <p class="impl-title">UPDATE RECORDS</p>
+          <p class="impl-desc">Ledger, powers, tax status</p>
+        </div>
+        <span class="impl-chev" aria-hidden="true">›</span>
+        <div class="impl-step">
+          <p class="impl-num">04</p>
+          <p class="impl-title">ADMINISTER</p>
+          <p class="impl-desc">Accounts, books, filings</p>
+        </div>
+      </div>
+    </section>
+
+    <p class="footnote">Illustrative framework. Revocable trusts generally do not shield assets from settlor creditors. LLC remedies vary by law; entity debts, guarantees, and voidable transfers remain relevant. Obtain tailored legal and tax review.</p>
+
+    <div class="sources-row">
+      <p class="sources">Sources: IRS: trusts | IRS: LLCs | IRS: S corporations | Florida: trust law | Florida: LLC law</p>
+      <p class="reviewed">Reviewed November 11, 2026</p>
+    </div>
+
+    <section class="howto">
+      <h2>How to read it</h2>
+      <p>Start with the three questions the map answers: who owns it, who manages it, and who benefits from it. The grantor creates and funds the family trust, the trustee holds legal title to the holding-company interests, and the beneficiaries receive benefits under the trust's distribution rules.</p>
+      <p>The trust sets the administration, succession, and distribution rules — including a successor trustee for continuity — while the appointed manager runs the holding company day to day. Each subsidiary LLC holds a separate slice of the business, so operating risks, property, and equipment or IP stay in their own boxes.</p>
+      <p>A structure only works once it is put into practice: signed transfers of the LLC interests into the trust, proper funding, separate accounts, and consistent recordkeeping. The Marathon Group helps business owners and families assess existing arrangements and coordinate with their legal and tax professionals.</p>
+    </section>
+
+    <p class="credit">Diagram: <a href="https://www.instagram.com/p/DfsiUuTT-1B/" target="_blank" rel="noopener">The Marathon Group (@ricoramirez86), Instagram, November 13, 2026</a></p>
+    <p class="credit">This page is research, not legal or tax advice.</p>
+  </main>
+
+  <script>
+    // Curtains wipe transition (vanilla). Intercepts only plain left-clicks
+    // on same-origin links: no modifiers, no middle-click, no target=_blank,
+    // no anchor-only or download links. Reduced motion: instant navigation.
+    (function () {
+      var wipe = document.querySelector(".wipe");
+      if (!wipe) return;
+
+      function reveal() {
+        document.documentElement.classList.remove("wipe-in");
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { requestAnimationFrame(reveal); });
+      } else {
+        requestAnimationFrame(reveal);
+      }
+      // bfcache restore: a page left covered must come back uncovered.
+      window.addEventListener("pageshow", function (e) {
+        if (e.persisted) {
+          wipe.classList.remove("cover");
+          document.documentElement.classList.remove("wipe-in");
+        }
+      });
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      document.addEventListener("click", function (event) {
+        if (event.defaultPrevented || event.button !== 0
+            || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        if (wipe.classList.contains("cover")) return;
+        var a = event.target && event.target.closest ? event.target.closest("a") : null;
+        if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+        var href = a.getAttribute("href");
+        if (!href || href.charAt(0) === "#") return;
+        var url;
+        try { url = new URL(href, location.href); } catch (err) { return; }
+        if (url.origin !== location.origin) return;
+        if (url.pathname === location.pathname && url.search === location.search) return;
+        event.preventDefault();
+        try { sessionStorage.setItem("bm-wipe", "1"); } catch (err) {}
+        var done = false;
+        function go() { if (!done) { done = true; location.href = url.href; } }
+        var fallback = setTimeout(go, 600);
+        var last = wipe.children[wipe.children.length - 1];
+        if (last) {
+          last.addEventListener("transitionend", function () { clearTimeout(fallback); go(); }, { once: true });
+        }
+        wipe.classList.add("cover");
+      });
+    })();
+  </script>
+</body>
+</html>
