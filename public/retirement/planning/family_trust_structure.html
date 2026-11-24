@@ -192,8 +192,25 @@
       display: block;
       margin: 0 auto;
     }
-    .hconn-v {
+    .hconn > svg.hconn-v {
       display: none;
+    }
+
+    /* Desktop only: the hconn label sits above the line without
+       pushing it off the boxes' midline — the svg alone is centred
+       in the row, the label floats above it. Mobile keeps the label
+       in flow (stacked layout, no midline to hold). */
+    @media (min-width: 641px) {
+      .hconn {
+        position: relative;
+      }
+      .hconn .conn-label {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 100%;
+        margin-bottom: 4px;
+      }
     }
 
     /* Branch: Holding Company LLC down to the three subsidiary LLCs.
@@ -490,10 +507,10 @@
       .hconn {
         padding: 8px 0;
       }
-      .hconn-h {
+      .hconn > svg.hconn-h {
         display: none;
       }
-      .hconn-v {
+      .hconn > svg.hconn-v {
         display: block;
       }
       /* Branch on mobile: a single centred arrow (the bar and the
@@ -589,8 +606,8 @@
       <!-- Shared arrowheads for the SVG connectors. -->
       <svg width="0" height="0" style="position:absolute" aria-hidden="true">
         <defs>
-          <marker id="arr-red" viewBox="0 0 10 10" refX="5" refY="8" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,0 L5,9 z" fill="#b01e2e"/></marker>
-          <marker id="arr-grey" viewBox="0 0 10 10" refX="5" refY="8" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,0 L5,9 z" fill="#999"/></marker>
+          <marker id="arr-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L0,10 L9,5 z" fill="#b01e2e"/></marker>
+          <marker id="arr-grey" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L0,10 L9,5 z" fill="#999"/></marker>
         </defs>
       </svg>
 
@@ -603,7 +620,7 @@
       <!-- Grantor → Family Trust -->
       <div class="vconn conn-red g-span g-r2">
         <span class="conn-label">establishes &amp; funds</span>
-        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
+        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="27" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
       </div>
 
       <!-- Tier 2 -->
@@ -624,8 +641,8 @@
       </div>
       <div class="hconn conn-red g-c4 g-r3">
         <span class="conn-label">benefits</span>
-        <svg class="hconn-h" width="52" height="12" viewBox="0 0 52 12" aria-hidden="true"><line x1="1" y1="6" x2="44" y2="6" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
-        <svg class="hconn-v" width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
+        <svg class="hconn-h" width="52" height="12" viewBox="0 0 52 12" aria-hidden="true"><line x1="1" y1="6" x2="50" y2="6" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
+        <svg class="hconn-v" width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="27" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
       </div>
       <div class="box box-grey g-c5 g-r3">
         <p class="box-title">BENEFICIARIES</p>
@@ -635,7 +652,7 @@
       <!-- Family Trust → Holding Company LLC -->
       <div class="vconn conn-red g-span g-r4">
         <span class="conn-label">LLC interests held in trust</span>
-        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
+        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="27" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
       </div>
 
       <!-- Tier 3 -->
@@ -646,8 +663,8 @@
       </div>
       <div class="hconn conn-grey g-c2 g-r5">
         <span class="conn-label">runs</span>
-        <svg class="hconn-h" width="52" height="12" viewBox="0 0 52 12" aria-hidden="true"><line x1="1" y1="6" x2="44" y2="6" stroke="#999" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr-grey)"/></svg>
-        <svg class="hconn-v" width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22" stroke="#999" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr-grey)"/></svg>
+        <svg class="hconn-h" width="52" height="12" viewBox="0 0 52 12" aria-hidden="true"><line x1="1" y1="6" x2="50" y2="6" stroke="#999" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr-grey)"/></svg>
+        <svg class="hconn-v" width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="27" stroke="#999" stroke-width="2" stroke-dasharray="6 4" marker-end="url(#arr-grey)"/></svg>
       </div>
       <div class="box box-black box-holding g-c3 g-r5">
         <p class="box-title">HOLDING COMPANY LLC</p>
@@ -682,7 +699,7 @@
       </div>
       <div class="vconn conn-red g-c1 g-r8">
         <span class="conn-label">runs</span>
-        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
+        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="27" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
       </div>
       <div class="box box-grey g-c1 g-r9">
         <p class="box-title">BUSINESS OPERATIONS</p>
@@ -695,7 +712,7 @@
       </div>
       <div class="vconn conn-red g-c3 g-r8">
         <span class="conn-label">holds</span>
-        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
+        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="27" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
       </div>
       <div class="box box-grey g-c3 g-r9">
         <p class="box-title">PROPERTY ASSETS</p>
@@ -708,7 +725,7 @@
       </div>
       <div class="vconn conn-red g-c5 g-r8">
         <span class="conn-label">holds</span>
-        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="22" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
+        <svg width="24" height="30" viewBox="0 0 24 30" aria-hidden="true"><line x1="12" y1="2" x2="12" y2="27" stroke="#b01e2e" stroke-width="2" marker-end="url(#arr-red)"/></svg>
       </div>
       <div class="box box-grey g-c5 g-r9">
         <p class="box-title">ASSETS &amp; RIGHTS</p>
