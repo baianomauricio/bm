@@ -50,9 +50,8 @@
 
     .pattern-grid {
       display: grid;
-      grid-template-columns: repeat(3, minmax(220px, 280px));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 36px 28px;
-      max-width: 920px;
       width: 100%;
     }
 
@@ -99,7 +98,6 @@
     }
 
     .macd-section {
-      max-width: 920px;
       width: 100%;
       margin-top: 64px;
     }
@@ -150,7 +148,7 @@
 
     .macd-row {
       display: grid;
-      grid-template-columns: repeat(2, minmax(220px, 280px));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 360px));
       gap: 36px 28px;
       justify-content: center;
       margin-top: 20px;
