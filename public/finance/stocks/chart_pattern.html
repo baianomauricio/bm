@@ -146,6 +146,26 @@
       letter-spacing: -0.01em;
     }
 
+    .macd-groups {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 36px 28px;
+      margin-top: 40px;
+    }
+
+    .macd-group {
+      border: 2px solid var(--box-stroke);
+      border-radius: 6px;
+      padding: 24px 20px;
+      flex: 1 1 640px;
+      max-width: 700px;
+    }
+
+    .macd-group .macd-type {
+      margin-top: 0;
+    }
+
     .macd-row {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -263,12 +283,20 @@
       <span><span class="dot" style="background:#1d4ed8"></span>MACD Line</span>
       <span><span class="dot" style="background:#eab308"></span>Signal Line</span>
     </div>
-    <h3 class="macd-type">Signal Line Crossover</h3>
-    <div class="macd-row" id="macd-crossover"></div>
-    <h3 class="macd-type">Divergence</h3>
-    <div class="macd-row" id="macd-divergence"></div>
-    <h3 class="macd-type">Centerline Crossover</h3>
-    <div class="macd-row" id="macd-centerline"></div>
+    <div class="macd-groups">
+      <div class="macd-group">
+        <h3 class="macd-type">Signal Line Crossover</h3>
+        <div class="macd-row" id="macd-crossover"></div>
+      </div>
+      <div class="macd-group">
+        <h3 class="macd-type">Divergence</h3>
+        <div class="macd-row" id="macd-divergence"></div>
+      </div>
+      <div class="macd-group">
+        <h3 class="macd-type">Centerline Crossover</h3>
+        <div class="macd-row" id="macd-centerline"></div>
+      </div>
+    </div>
   </section>
 
   <script>
