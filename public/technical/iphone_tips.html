@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5LXCBNQ3');</script>
+<!-- End Google Tag Manager -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BRBDZ471ZV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-BRBDZ471ZV');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iPhone Tips | Mauricio Baiano</title>
+  <meta name="description" content="iPhone tips collected from saved posts — security settings, storage cleanup, hidden codes, Wi-Fi troubleshooting, and a Pi-hole + Nextcloud home-server guide.">
+  <link rel="canonical" href="https://www.baianomauricio.com/technical/iphone_tips.html">
+  <style>
+    :root {
+      --bg: #fafafa;
+      --text: #222;
+      --muted: #555;
+      --border: #ddd;
+      --link: #234f86;
+      --link-hover: #102f58;
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 14pt; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      padding: 25px 1rem 2rem;
+    }
+    main { max-width: 48rem; margin: 0 auto; }
+    h1 {
+      font-weight: 300;
+      font-size: clamp(1.8rem, 6vw, 2.6rem);
+      letter-spacing: .025em;
+      line-height: 1.2;
+      margin: 1.5rem 0 1rem;
+    }
+    h2 { font-size: 1.3rem; font-weight: 600; line-height: 1.3; margin: 2.5rem 0 1rem; }
+    h3 { font-size: 1.1rem; font-weight: 600; line-height: 1.35; margin: 2rem 0 .5rem; }
+    h4 { font-size: 1rem; font-weight: 600; margin: 1.5rem 0 .5rem; }
+    p { margin: .75rem 0; }
+    ul, ol { margin: .5rem 0 1rem; padding-left: 1.4rem; }
+    li { margin: .35rem 0; }
+    a { color: var(--link); text-underline-offset: .17em; }
+    a:hover { color: var(--link-hover); }
+    a:focus-visible { outline: 3px solid var(--link); outline-offset: 4px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92em; }
+    pre {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-x: auto;
+      line-height: 1.5;
+    }
+    pre code { font-size: .85rem; }
+    .source { font-size: .85rem; color: var(--muted); margin-top: .5rem; }
+    footer {
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .8rem;
+      margin-top: 3rem;
+      padding-top: 1rem;
+    }
+    footer p { margin: 0; }
+
+    /* Fixed breadcrumb bar (site-wide): 25px, full width, above content.
+       The bar scrolls horizontally on narrow screens; the page itself
+       never gains horizontal overflow. */
+    .breadcrumb-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 25px; z-index: 100;
+      display: flex; align-items: center; gap: 8px; padding: 0 12px;
+      overflow-x: auto; white-space: nowrap; scrollbar-width: none;
+      background: #fafafa; border-bottom: 1px solid #ddd;
+      font-size: 12px; line-height: 25px;
+    }
+    .breadcrumb-bar::-webkit-scrollbar { display: none; }
+    .breadcrumb-bar a { color: #234f86; text-underline-offset: .17em; }
+    .breadcrumb-bar a:hover { color: #102f58; }
+    .breadcrumb-bar a:focus-visible { outline: 2px solid #234f86; outline-offset: 2px; }
+
+    /* Curtains wipe transition (vanilla, JS-only). Without JS the overlay
+       stays hidden and navigation is plain. Transform-only panels
+       (composited); the curtain sits above the breadcrumb bar. */
+    .wipe { position: fixed; inset: 0; z-index: 200; display: flex; pointer-events: none; visibility: hidden; transition: visibility 0s linear 480ms; }
+    .wipe-panel { flex: 1; background: #111; transform: translateY(-120%) skewY(12deg); transition: transform 350ms ease; height: calc(100% + 14.2vw); margin-top: -7.1vw; }
+    .wipe-panel:nth-child(2) { transition-delay: 60ms; }
+    .wipe-panel:nth-child(3) { transition-delay: 120ms; }
+    .wipe.cover { visibility: visible; transition: none; }
+    .wipe.cover .wipe-panel { transform: translateY(0) skewY(12deg); }
+    html.wipe-in .wipe { visibility: visible; }
+    html.wipe-in .wipe-panel { transform: translateY(0) skewY(12deg); }
+    @media (prefers-reduced-motion: reduce) {
+      .wipe-panel { transition: none; }
+    }
+  </style>
+
+  <script>
+    // Wipe arrival: if the previous page set the flag, start covered; the
+    // main script at the end of <body> lifts the curtain once ready.
+    // The flag is consumed on every load; reduced motion skips the cover.
+    try {
+      if (sessionStorage.getItem("bm-wipe") === "1") {
+        sessionStorage.removeItem("bm-wipe");
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.documentElement.classList.add("wipe-in");
+        }
+      }
+    } catch (e) { /* storage unavailable — plain load, no wipe */ }
+  </script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LXCBNQ3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div class="wipe" aria-hidden="true"><div class="wipe-panel"></div><div class="wipe-panel"></div><div class="wipe-panel"></div></div>
+<nav class="breadcrumb-bar" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Technical</span><span aria-hidden="true">/</span><span aria-current="page">iPhone Tips</span></nav>
+  <main>
+    <h1>iPhone Tips</h1>
+
+    <h2>Security</h2>
+
+    <h3>@dominatingtech — SIM-swap 5-step defense</h3>
+    <ul>
+      <li>Lock your carrier account with port-out protection so nobody can move your number to a new SIM by pretending to be you.</li>
+      <li>Turn off SMS two-factor everywhere; switch to authenticator apps (Aegis, 2FAS, Ente Auth).</li>
+      <li>Use hardware security keys (YubiKey 5, Google Titan) for email, password manager and financial accounts.</li>
+      <li>Remove your number from data brokers (Spokeo, Whitepages, BeenVerified) via services like Optery or DeleteMe; take it out of WHOIS records.</li>
+      <li>Use a burner number (Google Voice, MySudo) for signups.</li>
+    </ul>
+    <p class="source">Source: <a href="https://www.instagram.com/p/DeXpGk8EhNE/">@dominatingtech on Instagram</a> (2026-10-11)</p>
+
+    <h3>@cybersecuritygirl — secure your home Wi-Fi (the one password everything rides on)</h3>
+    <ul>
+      <li>Your phone, laptop, TV, cameras and doorbell all depend on one password: the Wi-Fi password. If it's short, predictable, reused elsewhere, or the same one you've shared for years, change it to something long and unique (router settings).</li>
+      <li>In the router's security/encryption settings, make sure you're on WPA2 or WPA3. If you see WEP, it's obsolete — switch it, and if the router can't do better, the router itself needs replacing.</li>
+    </ul>
+    <p class="source">Source: <a href="https://www.instagram.com/reel/Dek205JBGQb/">@cybersecuritygirl on Instagram</a> (2026-10-16)</p>
+
+    <h3>@stangnrv — lock Screen Time so no one can change your Apple ID settings</h3>
+    <ul>
+      <li>The creator's warning: someone who gets hold of your phone and enough information to reset your Apple ID password could take over the account, change its phone number and email, and lock you out — he claims even Apple couldn't restore access.</li>
+      <li>The fix, step by step: Settings → Screen Time → Content &amp; Privacy Restrictions → turn it on → set "Passcode &amp; Face ID" to Don't Allow, then do the same for "Accounts" (menu wording varies slightly by iOS version) → go back and tap "Lock Screen Time Settings" and set a unique four-digit passcode that only you know.</li>
+      <li>What this actually protects: it stops someone holding your unlocked phone from changing the passcode/Face ID settings or the account settings on the device. It does not stop a remote attacker who already has your Apple ID credentials — this is a physical-access lock, not remote-attack protection.</li>
+      <li>Side effects, from the creator's own replies to comments: Apple ID settings grey out until you temporarily re-enable Account Changes; Face ID keeps working; the Screen Time passcode is separate from your phone unlock passcode — don't confuse the two, and don't forget it.</li>
+    </ul>
+    <p class="source">Source: <a href="https://www.instagram.com/reel/De6g_OxCJCf/">@stangnrv on Instagram</a> (2026-10-25)</p>
+
+    <h3>@jornadatop — SIM PIN lock</h3>
+    <ul>
+      <li>iPhone Settings → Cellular → SIM PIN, enable it and change the carrier default PIN (Vivo's is 8486; Claro, TIM, Oi and Algar have their own). After any restart the phone asks for the PIN, so a thief who pops out your chip gets nothing. Three wrong guesses lock the chip — you'll need the PUK code from your carrier.</li>
+    </ul>
+    <p class="source">Source: <a href="https://www.instagram.com/reel/DY4ondcuEQO/">@jornadatop on Instagram</a> (2026-05-28)</p>
+
+    <h3>@jornadatop and @marcolamaia — hide banking apps when away (Cape app)</h3>
+    <ul>
+      <li>Use "Cape: App to Pause Excess" to hide selected apps (banking, payments, social) whenever you're outside a location you draw on a map around your home. Set it to total block, protect it with its own passcode, and lock the iPhone so the helper app itself can't be deleted (Screen Time → Content &amp; Privacy Restrictions → Delete Apps → Don't Allow).</li>
+    </ul>
+    <p class="source">Sources: <a href="https://www.instagram.com/reel/DX38LEABxKY/">@jornadatop on Instagram</a> (2026-05-03) and <a href="https://www.instagram.com/reel/DWyzcbdFWc3/">@marcolamaia on Instagram</a> (2026-04-06)</p>
+
+    <h3>@islamsousa — stop sending documents via WhatsApp</h3>
+    <ul>
+      <li>Don't send documents (ID, driver's license, proof of address) through WhatsApp — if the recipient's phone is compromised, your documents go with it. If you must: redact or blur sensitive fields, convert to black-and-white, and add a diagonal "Apenas para conferência" watermark.</li>
+    </ul>
+    <p class="source">Source: <a href="https://www.instagram.com/reel/DWv11BBBqtE/">@islamsousa on Instagram</a> (2026-04-05)</p>
+
+    <h3>@jornadatop — remote lock + location automation</h3>
+    <ul>
+      <li>Build an iPhone Shortcuts shortcut that locks the screen, grabs the GPS location and texts it to a trusted contact; add a personal automation so that when that contact messages you the keyword "bloquear", it runs instantly with no confirmation.</li>
+    </ul>
+    <p class="source">Source: <a href="https://www.instagram.com/reel/DWEEkKYDhnI/">@jornadatop on Instagram</a> (2026-03-19)</p>
+
+    <h3>@technologybrief — secret iPhone codes (security-relevant one)</h3>
+    <ul>
+      <li>Dial *#21# (or *#62#) to check for call forwarding on your line — a quick way to spot if your number has been tampered with.</li>
+    </ul>
+    <p class="source">Source: <a href="https://www.instagram.com/p/Def_47Xlkc9/">@technologybrief on Instagram</a> (2026-10-14)</p>
+
+    <h2>Storage &amp; Performance</h2>
+
+    <h3>@furiouslytech — 4 settings to free iPhone storage</h3>
+    <ul>
+      <li>Offload unused apps instead of deleting them, merge duplicate photos, set Keep Messages to 1 year, and empty the deleted-photos trash — four settings that reclaim space without paying for more iCloud.</li>
+    </ul>
+    <p class="source">Source: <a href="https://www.instagram.com/p/Da-WexPlA4J/">@furiouslytech on Instagram</a> (2026-07-19)</p>
+
+    <h2>Hidden Codes</h2>
+
+    <h3>@technologybrief — 9 codes that unlock your iPhone's secret menu</h3>
+    <ul>
+      <li>Dial *#06# to see your IMEI; *3001#12345#* opens Field Test mode to read your true cellular signal strength; #31# before a number hides your caller ID; *#43# checks call-waiting status. (The *#21# call-forwarding check is also covered under Security above.)</li>
+    </ul>
+    <p class="source">Source: <a href="https://www.instagram.com/p/Def_47Xlkc9/">@technologybrief on Instagram</a> (2026-10-14)</p>
+
+    <h2>Wi-Fi &amp; Network</h2>
+
+    <h3>@codingknowledge — troubleshoot slow Wi-Fi with 7 Claude prompts</h3>
+    <ul>
+      <li>These prompts run in Claude Desktop with computer-use permissions and access to system logs — without those, Claude can't run the diagnostics. Review every finding before approving a change; each prompt is written to report first and act only with permission.</li>
+      <li>1. Internet Speed Diagnosis — test the connection and compare download speed, upload speed, and ping against the speed the ISP promised; identify any major performance gaps.</li>
+      <li>2. Bandwidth Usage Audit — find the apps, downloads, background updates, or sync processes consuming the most bandwidth; show results but stop nothing without permission.</li>
+      <li>3. Wi-Fi Disconnection Analysis — review the last 7 days of available Wi-Fi connection logs; identify disconnections, recurring issues, and possible causes.</li>
+      <li>4. Wi-Fi Signal &amp; Channel Analysis — analyze signal strength, channel congestion, and 2.4 GHz vs. 5 GHz performance; recommend router improvements without changing settings.</li>
+      <li>5. Connected Device Check — list devices on the Wi-Fi with hostname, manufacturer, IP, and MAC address where available; flag unfamiliar devices but disconnect nothing.</li>
+      <li>6. Network Settings Audit — check DNS, network adapter, drivers, power-saving settings, VPN, and proxy configuration; identify issues and suggest fixes without applying them.</li>
+      <li>7. Weekly Internet Monitoring — set up weekly speed monitoring every Monday at 9 AM, track results in a spreadsheet, flag speeds below 50% of the subscribed plan for 3 consecutive weeks, and prepare an ISP complaint email without sending it.</li>
+      <li>The "$100-an-hour technician" framing and the "prove your ISP isn't delivering" promise are the creator's. Commenters were mixed: several pointed out that router quality and ISP backbone problems outweigh local diagnostics, one dismissed the post as "AI slop," and one asked whether ChatGPT could do the same job just as well. Treat the prompts as a diagnostic starting point, not a fix for ISP-side problems.</li>
+    </ul>
+    <p class="source">Source: <a href="https://www.instagram.com/p/DfhVoM6ElZQ/">@codingknowledge on Instagram</a> (2026-11-09)</p>
+
+    <h3>Turn an old laptop into a home server (Pi-hole + Nextcloud)</h3>
+    <p>Two self-hosted services that pair well with the iPhone: Pi-hole blocks ads and trackers for the whole home network (iPhone included, no app needed), and Nextcloud is a private self-hosted iCloud-style drive for files, photos, contacts and calendar. Both run fine on typical old-laptop hardware.</p>
+
+    <h4>1. Put Linux on the laptop</h4>
+    <ul>
+      <li>Pi-hole officially supports Debian, Ubuntu, Fedora, CentOS Stream, Armbian, Alpine and Raspberry Pi OS, and needs only 512 MB of RAM and ~2 GB of free disk. Ubuntu Server or a Debian netinstall are the usual picks.</li>
+      <li>Check the CPU: Nextcloud AIO needs 64-bit (x86_64 or arm64); Pi-hole's core binary also runs on 32-bit x86 and ARM. A 32-bit-only laptop can still be a Pi-hole, just not a Nextcloud.</li>
+      <li>Warning: a standard Linux install can erase the laptop's disk. Back up anything you want to keep first, and only let the installer use the whole disk if wiping it is the plan - installers also offer manual partitioning or install-alongside options.</li>
+      <li>Give the laptop a fixed address: Pi-hole needs a static IP, and a DHCP reservation in the router's settings counts.</li>
+      <li>Keep it awake: the laptop has to stay on to serve the network, so set it to not sleep when the lid is closed and leave it plugged in.</li>
+    </ul>
+
+    <h4>2. Install Pi-hole</h4>
+    <p>Official one-step installer, run in the laptop's terminal:</p>
+    <pre><code>curl -sSL https://install.pi-hole.net | bash</code></pre>
+    <p>(If you don't like piping a script straight to bash, the docs list alternatives: clone the repo and run the installer, download the script first, or use the official Docker image.)</p>
+    <p>After it finishes:</p>
+    <ul>
+      <li>Set the admin password: <code>sudo pihole setpassword</code></li>
+      <li>Open the admin page at <code>http://&lt;laptop-ip&gt;/admin</code></li>
+      <li>Point the network at it: in the router's DHCP settings, set the DNS server to the laptop's IP. Every device that joins the Wi-Fi then resolves through Pi-hole automatically, iPhone included. (Or set it only on the phone: Settings → Wi-Fi → (i) next to the network → Configure DNS → Manual → add the laptop's IP.)</li>
+    </ul>
+    <p>Rollback plan: with the router pointing at Pi-hole, the laptop being off or broken takes DNS down for the whole network and the internet looks dead. To recover, set the router's DHCP DNS back to the ISP default or a public resolver (1.1.1.1 or 8.8.8.8). If the router allows a secondary DNS entry, adding a public resolver there softens future outages - though devices may then sometimes bypass Pi-hole's blocking.</p>
+
+    <h4>3. Install Nextcloud (official All-in-One)</h4>
+    <p>Nextcloud's official easy install is the All-in-One (AIO) Docker bundle, which includes the web interface, database, caching, backups and updates in one managed setup.</p>
+    <ol>
+      <li>Install Docker by following Docker's official docs for your distro. Don't use Ubuntu's snap Docker package - AIO doesn't support it.</li>
+      <li>AIO's official startup command is:
+        <pre><code>sudo docker run \
+  --init \
+  --sig-proxy=false \
+  --name nextcloud-aio-mastercontainer \
+  --restart always \
+  --publish 80:80 \
+  --publish 8080:8080 \
+  --publish 8443:8443 \
+  --volume nextcloud_aio_mastercontainer:/mnt/docker-aio-config \
+  --volume /var/run/docker.sock:/var/run/docker.sock:ro \
+  ghcr.io/nextcloud-releases/all-in-one:latest</code></pre>
+        Its ports, per the AIO docs:
+        <ul>
+          <li>8080: the AIO management interface, reachable by IP with a self-signed certificate. Admin/setup panel only, not Nextcloud itself.</li>
+          <li>80: redirect plus the ACME challenge used to issue a real certificate. Only needed with a domain.</li>
+          <li>8443: the same management interface over a valid certificate - only with a domain and ports 80/8443 forwarded.</li>
+          <li>443 (not in this command): once setup finishes, AIO starts its Apache container on host port 443 - that is the actual Nextcloud web UI.</li>
+          <li>3478 TCP/UDP: only if you enable Nextcloud Talk calls.</li>
+        </ul>
+      </li>
+      <li>Running it next to Pi-hole on the same laptop takes some port planning: Pi-hole's admin page wants 80/443 and falls back to 8080/8443 when those are taken, while AIO wants 80/8080/8443 plus 443 for the Nextcloud UI. For home use, replace the three --publish lines above with just the management interface on a free port:
+        <pre><code>  --publish 8081:8080</code></pre>
+        and leave the rest of the command unchanged. If Pi-hole's admin page claimed 443 first, AIO's Apache container can't publish the Nextcloud UI there - either move Pi-hole's web UI (it only needs port 53 for DNS; its port is configurable via the webserver.port setting) or move Nextcloud's UI with AIO's APACHE_PORT environment variable.
+      </li>
+      <li>Open <code>https://&lt;laptop-ip&gt;:8081</code> (accept the self-signed-certificate warning) and finish setup in the AIO interface. One requirement to know upfront: AIO needs a domain with a valid certificate - reaching Nextcloud by bare IP is unsupported. The free route is registering a deSEC <code>dedyn.io</code> subdomain directly from the AIO interface, the docs' recommended local-instance option. AIO's docs also describe using Pi-hole as the local DNS with a custom record pointing your Nextcloud domain at the laptop, so the two services end up working together.</li>
+    </ol>
+
+    <h4>Good to know</h4>
+    <ul>
+      <li>Both are free and open source; the real cost is the electricity of an always-on laptop.</li>
+      <li>Once Nextcloud is running, the official Nextcloud iOS app handles files, photo auto-upload and contacts/calendar sync - point it at your Nextcloud domain.</li>
+      <li>Everything above runs on the laptop and the router, not on the iPhone itself.</li>
+    </ul>
+    <p class="source">Sources: <a href="https://docs.pi-hole.net/main/prerequisites/">Pi-hole prerequisites</a> and <a href="https://docs.pi-hole.net/main/basic-install/">install</a> docs; <a href="https://github.com/nextcloud/all-in-one">Nextcloud All-in-One README</a> with its local-instance and reverse-proxy docs.</p>
+
+    <footer>
+      <p>© 2026 · <a href="/">Home</a></p>
+    </footer>
+  </main>
+
+  <script>
+    // Curtains wipe transition (vanilla). Intercepts only plain left-clicks
+    // on same-origin links: no modifiers, no middle-click, no target=_blank,
+    // no anchor-only or download links. Reduced motion: instant navigation.
+    (function () {
+      var wipe = document.querySelector(".wipe");
+      if (!wipe) return;
+
+      function reveal() {
+        document.documentElement.classList.remove("wipe-in");
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { requestAnimationFrame(reveal); });
+      } else {
+        requestAnimationFrame(reveal);
+      }
+      // bfcache restore: a page left covered must come back uncovered.
+      window.addEventListener("pageshow", function (e) {
+        if (e.persisted) {
+          wipe.classList.remove("cover");
+          document.documentElement.classList.remove("wipe-in");
+        }
+      });
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      document.addEventListener("click", function (event) {
+        if (event.defaultPrevented || event.button !== 0
+            || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        if (wipe.classList.contains("cover")) return;
+        var a = event.target && event.target.closest ? event.target.closest("a") : null;
+        if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+        var href = a.getAttribute("href");
+        if (!href || href.charAt(0) === "#") return;
+        var url;
+        try { url = new URL(href, location.href); } catch (err) { return; }
+        if (url.origin !== location.origin) return;
+        if (url.pathname === location.pathname && url.search === location.search) return;
+        event.preventDefault();
+        try { sessionStorage.setItem("bm-wipe", "1"); } catch (err) {}
+        var done = false;
+        function go() { if (!done) { done = true; location.href = url.href; } }
+        var fallback = setTimeout(go, 600);
+        var last = wipe.children[wipe.children.length - 1];
+        if (last) {
+          last.addEventListener("transitionend", function () { clearTimeout(fallback); go(); }, { once: true });
+        }
+        wipe.classList.add("cover");
+      });
+    })();
+  </script>
+</body>
+</html>

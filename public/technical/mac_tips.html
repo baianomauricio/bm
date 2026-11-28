@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5LXCBNQ3');</script>
+<!-- End Google Tag Manager -->
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-BRBDZ471ZV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-BRBDZ471ZV');
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mac Tips | Mauricio Baiano</title>
+  <meta name="description" content="Mac tips collected from saved posts — privacy settings, trackpad gestures, and Finder cleanup for a new MacBook.">
+  <link rel="canonical" href="https://www.baianomauricio.com/technical/mac_tips.html">
+  <style>
+    :root {
+      --bg: #fafafa;
+      --text: #222;
+      --muted: #555;
+      --border: #ddd;
+      --link: #234f86;
+      --link-hover: #102f58;
+    }
+    * { box-sizing: border-box; }
+    html { font-size: 14pt; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      line-height: 1.65;
+      padding: 25px 1rem 2rem;
+    }
+    main { max-width: 48rem; margin: 0 auto; }
+    h1 {
+      font-weight: 300;
+      font-size: clamp(1.8rem, 6vw, 2.6rem);
+      letter-spacing: .025em;
+      line-height: 1.2;
+      margin: 1.5rem 0 1rem;
+    }
+    h2 { font-size: 1.3rem; font-weight: 600; line-height: 1.3; margin: 2.5rem 0 1rem; }
+    h3 { font-size: 1.1rem; font-weight: 600; line-height: 1.35; margin: 2rem 0 .5rem; }
+    p { margin: .75rem 0; }
+    ul, ol { margin: .5rem 0 1rem; padding-left: 1.4rem; }
+    li { margin: .35rem 0; }
+    a { color: var(--link); text-underline-offset: .17em; }
+    a:hover { color: var(--link-hover); }
+    a:focus-visible { outline: 3px solid var(--link); outline-offset: 4px; }
+    code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: .92em; }
+    .source { font-size: .85rem; color: var(--muted); margin-top: .5rem; }
+    footer {
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: .8rem;
+      margin-top: 3rem;
+      padding-top: 1rem;
+    }
+    footer p { margin: 0; }
+
+    /* Fixed breadcrumb bar (site-wide): 25px, full width, above content.
+       The bar scrolls horizontally on narrow screens; the page itself
+       never gains horizontal overflow. */
+    .breadcrumb-bar {
+      position: fixed; top: 0; left: 0; right: 0; height: 25px; z-index: 100;
+      display: flex; align-items: center; gap: 8px; padding: 0 12px;
+      overflow-x: auto; white-space: nowrap; scrollbar-width: none;
+      background: #fafafa; border-bottom: 1px solid #ddd;
+      font-size: 12px; line-height: 25px;
+    }
+    .breadcrumb-bar::-webkit-scrollbar { display: none; }
+    .breadcrumb-bar a { color: #234f86; text-underline-offset: .17em; }
+    .breadcrumb-bar a:hover { color: #102f58; }
+    .breadcrumb-bar a:focus-visible { outline: 2px solid #234f86; outline-offset: 2px; }
+
+    /* Curtains wipe transition (vanilla, JS-only). Without JS the overlay
+       stays hidden and navigation is plain. Transform-only panels
+       (composited); the curtain sits above the breadcrumb bar. */
+    .wipe { position: fixed; inset: 0; z-index: 200; display: flex; pointer-events: none; visibility: hidden; transition: visibility 0s linear 480ms; }
+    .wipe-panel { flex: 1; background: #111; transform: translateY(-120%) skewY(12deg); transition: transform 350ms ease; height: calc(100% + 14.2vw); margin-top: -7.1vw; }
+    .wipe-panel:nth-child(2) { transition-delay: 60ms; }
+    .wipe-panel:nth-child(3) { transition-delay: 120ms; }
+    .wipe.cover { visibility: visible; transition: none; }
+    .wipe.cover .wipe-panel { transform: translateY(0) skewY(12deg); }
+    html.wipe-in .wipe { visibility: visible; }
+    html.wipe-in .wipe-panel { transform: translateY(0) skewY(12deg); }
+    @media (prefers-reduced-motion: reduce) {
+      .wipe-panel { transition: none; }
+    }
+  </style>
+
+  <script>
+    // Wipe arrival: if the previous page set the flag, start covered; the
+    // main script at the end of <body> lifts the curtain once ready.
+    // The flag is consumed on every load; reduced motion skips the cover.
+    try {
+      if (sessionStorage.getItem("bm-wipe") === "1") {
+        sessionStorage.removeItem("bm-wipe");
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          document.documentElement.classList.add("wipe-in");
+        }
+      }
+    } catch (e) { /* storage unavailable — plain load, no wipe */ }
+  </script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5LXCBNQ3"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<div class="wipe" aria-hidden="true"><div class="wipe-panel"></div><div class="wipe-panel"></div><div class="wipe-panel"></div></div>
+<nav class="breadcrumb-bar" aria-label="Breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><span>Technical</span><span aria-hidden="true">/</span><span aria-current="page">Mac Tips</span></nav>
+  <main>
+    <h1>Mac Tips</h1>
+    <p class="source">From @astraltechs — 3 settings to change on a new MacBook (2026-11-26). Source: <a href="https://www.instagram.com/reel/DgNzoDvJAqw/">@astraltechs on Instagram</a></p>
+
+    <h2>Privacy &amp; Security</h2>
+    <ul>
+      <li>Turn off Mac Analytics sharing: System Settings → Privacy &amp; Security → Analytics &amp; Improvements → switch "Share Mac Analytics" off. The creator's framing: Apple collects usage data in the background that most people never notice. (In the demo, "Share iCloud Analytics" stays on and the other analytics toggles are already off.)</li>
+    </ul>
+
+    <h2>Trackpad &amp; Input</h2>
+    <ul>
+      <li>Enable three-finger drag: System Settings → Accessibility → Pointer Control → Trackpad Options… → turn on "Use trackpad for dragging" and set the dragging style to "Three Finger Drag", then OK. You can then drag windows and files with three fingers instead of click-and-hold; the creator says it makes the trackpad feel much smoother.</li>
+    </ul>
+
+    <h2>Finder &amp; Files</h2>
+    <ul>
+      <li>Clean up the Finder sidebar: Finder → Settings… → Sidebar → uncheck the locations you don't actually use (the demo removes Movies, Music and Pictures; keeps Documents, Downloads and iCloud Drive). The creator's claim: a cleaner sidebar makes the Mac feel faster to navigate.</li>
+    </ul>
+
+    <footer>
+      <p>© 2026 · <a href="/">Home</a></p>
+    </footer>
+  </main>
+
+  <script>
+    // Curtains wipe transition (vanilla). Intercepts only plain left-clicks
+    // on same-origin links: no modifiers, no middle-click, no target=_blank,
+    // no anchor-only or download links. Reduced motion: instant navigation.
+    (function () {
+      var wipe = document.querySelector(".wipe");
+      if (!wipe) return;
+
+      function reveal() {
+        document.documentElement.classList.remove("wipe-in");
+      }
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", function () { requestAnimationFrame(reveal); });
+      } else {
+        requestAnimationFrame(reveal);
+      }
+      // bfcache restore: a page left covered must come back uncovered.
+      window.addEventListener("pageshow", function (e) {
+        if (e.persisted) {
+          wipe.classList.remove("cover");
+          document.documentElement.classList.remove("wipe-in");
+        }
+      });
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      document.addEventListener("click", function (event) {
+        if (event.defaultPrevented || event.button !== 0
+            || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+        if (wipe.classList.contains("cover")) return;
+        var a = event.target && event.target.closest ? event.target.closest("a") : null;
+        if (!a || a.target === "_blank" || a.hasAttribute("download")) return;
+        var href = a.getAttribute("href");
+        if (!href || href.charAt(0) === "#") return;
+        var url;
+        try { url = new URL(href, location.href); } catch (err) { return; }
+        if (url.origin !== location.origin) return;
+        if (url.pathname === location.pathname && url.search === location.search) return;
+        event.preventDefault();
+        try { sessionStorage.setItem("bm-wipe", "1"); } catch (err) {}
+        var done = false;
+        function go() { if (!done) { done = true; location.href = url.href; } }
+        var fallback = setTimeout(go, 600);
+        var last = wipe.children[wipe.children.length - 1];
+        if (last) {
+          last.addEventListener("transitionend", function () { clearTimeout(fallback); go(); }, { once: true });
+        }
+        wipe.classList.add("cover");
+      });
+    })();
+  </script>
+</body>
+</html>

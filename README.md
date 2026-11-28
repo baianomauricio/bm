@@ -12,10 +12,12 @@ This site is the personal member of a three-site collection: [mauriciosilva.com]
 
 | Route | Content |
 |---|---|
-| `/` | Holding page — minimal, with Hobby → Finance and Retirement → Planning expandable launchers side by side, linking the finance and retirement pages |
+| `/` | Holding page — minimal, with Hobby → Finance, Retirement → Planning and Technical expandable launchers side by side, linking the finance, retirement and technical pages |
 | `/finance/stocks/chart_pattern.html` | Bearish Candlestick Patterns reference - 16 pattern cards with example charts, plus a MACD Indicator section (signal line crossover, divergence, centerline crossover — bullish and bearish) |
 | `/finance/stocks/market_recovery.html` | Market Shocks & Recovery - S&P 500 returns 1 and 12 months after 28 major world events, 1940–2026, with sparklines and a near-a-recession column (source: LPL Financial; three rows computed from index closes) |
 | `/retirement/planning/family_trust_structure.html` | Family Trust Structure - ownership, management, succession and separate business risks; grantor, family trust, holding company and separate LLCs diagram (source: The Marathon Group) |
+| `/technical/iphone_tips.html` | iPhone Tips - security, storage, hidden codes, Wi-Fi troubleshooting and a Pi-hole + Nextcloud home-server guide, collected from saved posts |
+| `/technical/mac_tips.html` | Mac Tips - privacy, trackpad and Finder settings for a new MacBook, collected from saved posts |
 | `/ai/` | AI hobby index |
 | `/ai/claude-secret-codes.html` | Five Claude prompt shortcuts from Outskill, with attribution and unverified-claims notes |
 
@@ -30,13 +32,15 @@ This site is the personal member of a three-site collection: [mauriciosilva.com]
 - https://www.baianomauricio.com/finance/stocks/chart_pattern.html (Bearish Candlestick Patterns reference)
 - https://www.baianomauricio.com/finance/stocks/market_recovery.html (Market Shocks & Recovery reference)
 - https://www.baianomauricio.com/retirement/planning/family_trust_structure.html (Family Trust Structure reference)
+- https://www.baianomauricio.com/technical/iphone_tips.html (iPhone Tips reference)
+- https://www.baianomauricio.com/technical/mac_tips.html (Mac Tips reference)
 
 - https://www.baianomauricio.com/ai/ (AI hobby)
 - https://www.baianomauricio.com/ai/claude-secret-codes.html (Claude prompting reference)
 
 ## Repo layout
 
-- `public/` — site source and deploy directory: the `index.html` holding page plus standalone pages in `finance/stocks/` and `retirement/planning/`, and the AI hobby pages in `ai/`
+- `public/` — site source and deploy directory: the `index.html` holding page plus standalone pages in `finance/stocks/`, `retirement/planning/` and `technical/`, and the AI hobby pages in `ai/`
 - `firebase.json` — Hosting config (`public/` web root)
 - `.github/workflows/` — CI: pushes to `master` auto-deploy to production
 

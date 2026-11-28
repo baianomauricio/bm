@@ -186,6 +186,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="launchers">
       <div class="launcher" id="launcher"></div>
       <div class="launcher" id="retirement-launcher"></div>
+      <div class="launcher" id="technical-launcher"></div>
     </div>
     <p style="margin-top:2rem;font-size:0.8rem;color:#aaa">&copy; 2026</p>
   </main>
@@ -194,7 +195,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // Home-page launchers (FR-01–FR-06). Vanilla JS + CSS only — the
     // change request's React/Motion references are pattern inspiration.
     // Links are data-driven (FR-03): adding a page is one array entry.
-    // One builder serves both groups; each keeps its own open state.
+    // One builder serves all groups; each keeps its own open state.
     const FINANCE_LINKS = [
       { label: "Candlestick Patterns & MACD Signals", href: "/finance/stocks/chart_pattern.html" },
       { label: "S&P 500 Returns After Major World Events", href: "/finance/stocks/market_recovery.html" }
@@ -202,6 +203,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     const RETIREMENT_LINKS = [
       { label: "Family Trust Structure", href: "/retirement/planning/family_trust_structure.html" }
+    ];
+
+    const TECHNICAL_LINKS = [
+      { label: "iPhone Tips", href: "/technical/iphone_tips.html" },
+      { label: "Mac Tips", href: "/technical/mac_tips.html" }
     ];
 
     function buildLauncher(containerId, menuId, triggerText, links) {
@@ -288,6 +294,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     buildLauncher("launcher", "launcher-menu", "Hobby → Finance", FINANCE_LINKS);
     buildLauncher("retirement-launcher", "retirement-launcher-menu", "Retirement → Planning", RETIREMENT_LINKS);
+    buildLauncher("technical-launcher", "technical-launcher-menu", "Technical", TECHNICAL_LINKS);
   </script>
 
   <script>
